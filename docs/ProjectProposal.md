@@ -38,7 +38,7 @@ Mispronouncing names can be seen as disrespectful by those people. In a immigran
 
 _Explain your audience’s pain points that are contributing to their defined problem and their impact on the user. Primary Research should support your explanations._
 
-Avoiding offending people by mispronouncing their names multiple times or having trouble mispronouncing names live.
+Avoiding interrupting your flow by mispronouncing their names multiple times or having trouble mispronouncing names live.
 
 ## Solution Statement
 
