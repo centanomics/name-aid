@@ -32,17 +32,19 @@ _In a few sentences explain the problem your target market is seeing that requir
 
 Mispronouncing names can be seen as disrespectful by those people. In a immigrants case, it could be painful and make them decide on [choosing a more americanized name](http://neatoday.org/2016/09/01/pronouncing-students-names/) to avoid mispronounciations.
 
+[research link](https://www.pbs.org/newshour/education/a-teacher-mispronouncing-a-students-name-can-have-a-lasting-impact)
+
 ## Pain Points
 
 _Explain your audience’s pain points that are contributing to their defined problem and their impact on the user. Primary Research should support your explanations._
 
-Avoiding offending people by mispronouncing their names multiple times.
+Avoiding offending people by mispronouncing their names multiple times or having trouble mispronouncing names live.
 
 ## Solution Statement
 
 _How is your project going to solve the problem outlined above? Consider the competing products in your market space. What makes your solution different from other’s attempts to solve the problem? How are you able to better solve the defined problem for your audience than your competition?_
 
-Allows the users to save terms/names to a collection, then be able to reference that collection later on
+Allows the users to save terms/names to a collection, then be able to reference that collection later. Able to quickly reference the collections they've created
 
 ## Competition
 
