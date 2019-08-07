@@ -16,6 +16,8 @@ Secondary markets could include places like school competitions where speakers w
 
 -public speaker who announces for competitions
 
+-1st grade teacher
+
 ## Use Cases
 
 A teacher creates collections of names for her students each school year to not mispronounce the names.
