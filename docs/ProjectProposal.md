@@ -12,17 +12,17 @@ Secondary markets could include places like school competitions where speakers w
 
 ## User Profile
 
--world cup commentator
+-world cup commentator, seasoned guy, been at the job for years, almost commentates on all of his countries games
 
--public speaker who announces for competitions
+-public speaker who announces for competitions, narrates documentations in his free time
 
--1st grade teacher
+-1st grade teacher - first time, very nervous about making mistakes
 
 ## Use Cases
 
 A teacher creates collections of names for her students each school year to not mispronounce the names.
 
-A World cup commentator creates a collection of the players competing
+A World cup commentator creates a collection of the players competing and can send a reference to coworkers
 
 A narrator for a science documentary makes a collection of the terms used in the program so he doesn't fumble his words while speaking.
 
@@ -30,15 +30,15 @@ A narrator for a science documentary makes a collection of the terms used in the
 
 _In a few sentences explain the problem your target market is seeing that requires this project to be built. This will identify why is your application needed and needs to be supported by Primary Research._
 
-Mispronouncing names can be seen as disrespectful by those people. In a immigrants case, it could be painful and make them decide on [choosing a more americanized name](http://neatoday.org/2016/09/01/pronouncing-students-names/) to avoid mispronounciations.
+Mispronouncing names can be seen as disrespectful by those people. In some cases, it could be painful and make them decide on [choosing a more americanized name](http://neatoday.org/2016/09/01/pronouncing-students-names/) simply to avoid mispronounciations.
 
-[research link](https://www.pbs.org/newshour/education/a-teacher-mispronouncing-a-students-name-can-have-a-lasting-impact)
+[Can also have a lasting impact on younger students](https://www.pbs.org/newshour/education/a-teacher-mispronouncing-a-students-name-can-have-a-lasting-impact)
 
 ## Pain Points
 
 _Explain your audience’s pain points that are contributing to their defined problem and their impact on the user. Primary Research should support your explanations._
 
-Avoiding interrupting your flow by mispronouncing their names multiple times or having trouble mispronouncing names live.
+Avoiding interrupting your flow by mispronouncing their names multiple times or having trouble mispronouncing names live. Trying to avoid has many 'takes' as possible
 
 ## Solution Statement
 
@@ -54,6 +54,10 @@ _What competing products exist to solve this or a similar problem? Identify and 
 
 - [natural reader](https://www.naturalreaders.com/online/)
 
+- [Pronounce Names](https://www.pronouncenames.com/) - shows you how to pronounce anything. Allows submissions.
+
+- [toIPA](https://tophonetics.com/) - creates api - english only
+
 ## Key Features
 
 _Define key features intended to provide solutions to specific problems and pain points you have identified. These key features should be specifically defined in response to problems / pain points. More generic features like User Authentication should not be defined here._
@@ -65,6 +69,7 @@ _Define key features intended to provide solutions to specific problems and pain
 
 ## Integrations
 
-[IBM Text to speech api](https://cloud.ibm.com/apidocs/text-to-speech)
+[IBM Text to speech api](https://cloud.ibm.com/apidocs/text-to-speech) or [Google tts](https://cloud.google.com/text-to-speech/docs/)
+Google has a 4 million character free tier per month
 
 [Merriam Webster API](https://dictionaryapi.com/products/json)
