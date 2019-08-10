@@ -47,13 +47,13 @@ Roxanne Wild
 
 ## Use Cases
 
-###Roxanne:
+### Roxanne:
 
 - She just saw the roster for each of the classes she is going to teach. She wants to add each class to a collection and practice pronouncing their names before the semester starts
 - Her classes are about to start a new unit. She understands that a few of the key terms used throughout this unit are difficult to pronounce. She creates a collcetion of those terms and allows her students to look at the pronunciations if they want
 - She notices that the person who is going to be the announcer at the science fair is having a trouble with a few of the terms used in the project and names of the competitors. She creates a Science fair group and puts the collections of terms and names within the group and shares that with the announcer.
 
-###Harry:
+### Harry:
 
 - He has trouble pronouncing names from teams from a few select countries. In order to prevent himself from fumbling over his words live, he creates a collection of names for those he has trouble with.
 - Harry notices a fellow caster from another country he sees often his having trouble with a few names. He decides to share his previously made list and adds on a few other names his friend has trouble with.
@@ -77,23 +77,18 @@ Allows the user to create a collection, consisting of one or more names or terms
 
 _What competing products exist to solve this or a similar problem? Identify and summarize competing products and how their approach to solving your identified problem differ from your own._
 
-- [Google Translate](https://translate.google.com/)
-	- Indirect competitor. Allows users to type in a word, in any language, and allow for it to be spoken out for the user to hear. Also gives definition of words translated. People who are curious how to pronounce a name can simply type it into google translate and use the sound bite to help them.
+- [Google Translate](https://translate.google.com/) - Indirect competitor. Allows users to type in a word, in any language, and allow for it to be spoken out for the user to hear. Also gives definition of words translated. People who are curious how to pronounce a name can simply type it into google translate and use the sound bite to help them.
 
-- [Pronounce Names](https://www.pronouncenames.com/)
-	- Shows users how to pronounce people names. It is only restricted to names and doesn't show IPA text along with the pronunciation. Also doesn't give a sound bite for users to hear. Since they allow user submissions, users can create their own sound bites and share that with who they want.
+- [Pronounce Names](https://www.pronouncenames.com/) - Shows users how to pronounce people names. It is only restricted to names and doesn't show IPA text along with the pronunciation. Also doesn't give a sound bite for users to hear. Since they allow user submissions, users can create their own sound bites and share that with who they want.
 
-- [toIPA](https://tophonetics.com/)
-	- Allows users to type in words they want to know the IPA for. It's restricted to only a few languages, but names and words work for the languages available. Gives a sound bite. Not able to share results. Also shows a few diffirent pronunciations, if they are available.
+- [toIPA](https://tophonetics.com/) - Allows users to type in words they want to know the IPA for. It's restricted to only a few languages, but names and words work for the languages available. Gives a sound bite. Not able to share results. Also shows a few diffirent pronunciations, if they are available.
 
 ## Key Features
 
 - creating and naming a collection
 - adding names to that collection
-- being able to share that collection to others who may need it
-	- Can also share specific words
+- being able to share that collection to others who may need it - Can also share specific words
 - managing names in the collection as needed
-
 
 ## Integrations
 
