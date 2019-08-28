@@ -1,5 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  min-height: 100vh;
+
+  /* background-image: url('./background.jpg'); */
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  background-color: #522452;
+  color: #ece8ec;
+  padding: 15px;
 }
