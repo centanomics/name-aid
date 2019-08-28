@@ -1,7 +1,12 @@
 import React from 'react';
 
 const About = () => {
-  return <h1>About</h1>;
+  return (
+    <div>
+      <section>Understanding Pronunciation</section>
+      <section>Create Collections</section>
+    </div>
+  );
 };
 
 export default About;
