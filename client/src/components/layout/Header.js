@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar color="light" light expand="md">
+    <Navbar light expand="md">
       <NavbarBrand tag={RRNavLink} to="/">
         reactstrap
       </NavbarBrand>
@@ -49,22 +49,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// ask about changing the ul when logging in is that now or later
-// <header>
-//       <h1>
-//         <img src="https://via.placeholder.com/150" alt="placeholder" />
-//         Name Aid
-//       </h1>
-//       <ul>
-//         <li>
-//           <Link to="/about">About</Link>
-//         </li>
-//         <li>
-//           <Link to="/register">Signup</Link>
-//         </li>
-//         <li>
-//           <Link to="/login">Login</Link>
-//         </li>
-//       </ul>
-//     </header>

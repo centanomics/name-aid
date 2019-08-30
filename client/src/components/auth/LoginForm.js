@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { NavLink as RRNavLink } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const changeEmail = e => {
+    setEmail(e.value);
+  };
+  const changePassword = e => {
+    setPassword(e.value);
+  };
+
   return (
     <Form>
       <FormGroup>
@@ -12,13 +23,23 @@ const Login = () => {
           name="email"
           id="email"
           placeholder="johndoe@gmail.com"
+          onChange={changeEmail}
+          value={email}
         />
       </FormGroup>
       <FormGroup>
         <Label for="password">Password</Label>
-        <Input type="password" name="password" id="password" />
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          onChange={changePassword}
+          value={password}
+        />
       </FormGroup>
-      <Button>Submit</Button>
+      <Button tag={RRNavLink} to="/home">
+        Submit
+      </Button>
     </Form>
   );
 };

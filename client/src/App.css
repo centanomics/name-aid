@@ -10,15 +10,23 @@ body {
 
   min-height: 100vh;
 
-  /* background-image: url('%PUBLIC_URL%/background.jpg'); */
+  background-image: url('/background.jpg');
 }
 
-header {
+/* Header */
+
+/* header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
+} */
+
+.navbar {
+  background-color: transparent;
 }
+
+/* Footer */
 
 footer {
   text-align: center;
