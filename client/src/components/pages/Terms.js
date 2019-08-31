@@ -1,7 +1,13 @@
 import React from 'react';
+import TermList from '../terms/TermList';
 
-const Terms = () => {
-  return <h1>Terms</h1>;
+const UserHome = () => {
+  return (
+    <section>
+      <h1>Class 1</h1>
+      <TermList />
+    </section>
+  );
 };
 
-export default Terms;
+export default UserHome;
