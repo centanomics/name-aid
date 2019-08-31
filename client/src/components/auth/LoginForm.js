@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
 
-const Login = () => {
+const Login = props => {
+  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login } = authContext;
 
   const changeEmail = e => {
     setEmail(e.value);
@@ -14,8 +18,15 @@ const Login = () => {
     setPassword(e.value);
   };
 
+  const onSubmit = e => {
+    e.preventDefault();
+    login();
+    // eslint-disable-next-line react/prop-types
+    props.history.push('/home');
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <FormGroup>
         <Label for="email">Email</Label>
         <Input
@@ -37,11 +48,9 @@ const Login = () => {
           value={password}
         />
       </FormGroup>
-      <Button tag={RRNavLink} to="/home">
-        Submit
-      </Button>
+      <Button type="submit">Submit</Button>
     </Form>
   );
 };
 
-export default Login;
+export default withRouter(Login);

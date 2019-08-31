@@ -25,7 +25,7 @@
     "constructor-super": "warn",
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
-    "indent": ["error", 2],
+    // "indent": ["error", 2],
     "no-const-assign": "warn",
     "no-extra-semi": "error",
     "no-this-before-super": "warn",
