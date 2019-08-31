@@ -4,7 +4,7 @@ import { NavLink as RRNavLink } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <section>
+    <section className="container">
       <h1>Having Trouble Pronouncing Names?</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
@@ -16,7 +16,7 @@ const Home = () => {
         orci at dictum pharetra. Quisque sed nunc a magna semper dictum.
         Phasellus fermentum orci at dictum pharetra.
       </p>
-      <Button color="primary" tag={RRNavLink} to="/register">
+      <Button tag={RRNavLink} to="/register">
         Get Started
       </Button>
     </section>

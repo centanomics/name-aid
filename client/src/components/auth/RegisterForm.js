@@ -34,7 +34,8 @@ const Register = props => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} className="container">
+      <h1>Create an Account</h1>
       <FormGroup>
         <Label for="name">Full Name:</Label>
         <Input

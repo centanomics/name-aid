@@ -31,17 +31,17 @@ const Header = props => {
   const authLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/about">
+        <NavLink tag={RRNavLink} to="/about" activeClassName="selected">
           About
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/collections">
+        <NavLink tag={RRNavLink} to="/home" activeClassName="selected">
           Collections
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/term">
+        <NavLink tag={RRNavLink} to="/term" activeClassName="selected">
           Terms
         </NavLink>
       </NavItem>
@@ -55,17 +55,17 @@ const Header = props => {
   const guestLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/about">
+        <NavLink tag={RRNavLink} to="/about" activeClassName="selected">
           About
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/login">
+        <NavLink tag={RRNavLink} to="/login" activeClassName="selected">
           Login
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/register">
+        <NavLink tag={RRNavLink} to="/register" activeClassName="selected">
           Register
         </NavLink>
       </NavItem>

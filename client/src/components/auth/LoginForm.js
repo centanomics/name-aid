@@ -26,7 +26,8 @@ const Login = props => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} className="container">
+      <h1>Login</h1>
       <FormGroup>
         <Label for="email">Email</Label>
         <Input

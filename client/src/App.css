@@ -55,6 +55,54 @@ body {
   padding-right: 16px;
 }
 
+.selected {
+  color: #7d387d;
+  border-bottom: 2px solid #7d387d;
+}
+
+/* Heading */
+
+h1 {
+  font-family: 'PT Serif', serif;
+  text-align: center;
+  padding-bottom: 32px;
+  color: #522452;
+}
+
+/* Home */
+
+.btn {
+  background-color: #7d387d;
+  display: block;
+  width: 200px;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.container > p {
+  max-width: 600px;
+  margin: 16px auto;
+}
+
+/* about */
+
+.container > section {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 64px;
+}
+
+.container > section div {
+  max-width: 600px;
+}
+
+.collections {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
 /* Footer */
 
 footer {

@@ -3,7 +3,7 @@ import CollectionList from '../collections/CollectionList';
 
 const UserHome = () => {
   return (
-    <section>
+    <section className="container">
       <h1>Your Collections!</h1>
       <CollectionList />
     </section>
