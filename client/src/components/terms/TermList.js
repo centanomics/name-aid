@@ -40,7 +40,7 @@ const TermList = () => {
 
   return (
     <div>
-      <div>
+      <div className="list-section">
         <p>
           {collections.length}
           {' Names'}
@@ -55,7 +55,7 @@ const TermList = () => {
         })}
       </ListGroup>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Add a Name</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>

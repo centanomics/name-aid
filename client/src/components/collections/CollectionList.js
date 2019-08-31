@@ -36,10 +36,10 @@ const CollectionList = () => {
 
   return (
     <div>
-      <div>
+      <div className="list-section">
         <p>
           {collections.length}
-          Collections
+          {' Collections'}
         </p>
         <Button color="danger" onClick={toggle}>
           Add new collection
@@ -51,7 +51,7 @@ const CollectionList = () => {
         })}
       </ListGroup>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Create a Collection</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>

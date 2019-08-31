@@ -103,6 +103,27 @@ h1 {
   text-align: right;
 }
 
+/* terms and collections */
+.list-section {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+/* list groups */
+
+.list-group-item {
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  color: #7d387d;
+}
+
+.list-group-item:hover {
+  text-decoration: none;
+  color: #7d387d;
+}
+
 /* Footer */
 
 footer {
