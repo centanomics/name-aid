@@ -10,10 +10,10 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom';
+import { NavLink as RRNavLink, withRouter } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
-const Header = () => {
+const Header = props => {
   const authContext = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const { isAuthenticated, logout } = authContext;
@@ -24,6 +24,8 @@ const Header = () => {
 
   const logOut = () => {
     logout();
+    // eslint-disable-next-line react/prop-types
+    props.history.push('/');
   };
 
   const authLinks = (
@@ -44,7 +46,9 @@ const Header = () => {
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink onClick={logOut}>Logout</NavLink>
+        <NavLink onClick={logOut} tag={RRNavLink} to="#">
+          Logout
+        </NavLink>
       </NavItem>
     </Nav>
   );
@@ -69,8 +73,14 @@ const Header = () => {
   );
 
   return (
-    <Navbar light expand="md">
+    <Navbar expand="md">
       <NavbarBrand tag={RRNavLink} to="/">
+        <img
+          src="icon.png"
+          alt="Name Aid Icon"
+          height="62px"
+          className="icon"
+        />
         Name Aid
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
@@ -81,4 +91,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
