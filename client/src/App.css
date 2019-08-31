@@ -60,6 +60,13 @@ body {
   border-bottom: 2px solid #7d387d;
 }
 
+.navbar-toggler {
+  background-image: url('/logo.png') !important;
+  background-origin: center;
+  background-position: center;
+  background-size: contain;
+}
+
 /* Heading */
 
 h1 {
