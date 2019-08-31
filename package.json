@@ -2,7 +2,7 @@
   "name": "capstone-project-semyers189",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -18,11 +18,15 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "precommit": "lint-staged",
-    "client": "npm start --prefix client"
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "npm install --only=dev --prefix client && npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -36,6 +40,7 @@
   },
   "homepage": "https://github.com/fs-tech-degs/capstone-project-semyers189#readme",
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.1.0",
@@ -45,7 +50,10 @@
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
