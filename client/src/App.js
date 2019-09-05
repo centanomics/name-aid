@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 import AuthState from './context/auth/AuthState';
 
 import Header from './components/layout/Header';
@@ -19,24 +22,26 @@ import './App.css';
 
 const App = () => {
   return (
-    <AuthState>
-      <Router>
-        <div className="App">
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/home" component={UserHome} />
-            <Route exact path="/collections" component={Collections} />
-            <Route exact path="/term" component={Terms} />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
-    </AuthState>
+    <Provider store={store}>
+      <AuthState>
+        <Router>
+          <div className="App">
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/home" component={UserHome} />
+              <Route exact path="/collections" component={Collections} />
+              <Route exact path="/term" component={Terms} />
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </AuthState>
+    </Provider>
   );
 };
 
