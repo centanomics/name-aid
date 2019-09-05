@@ -1,44 +1,35 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  ListGroup
-} from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Button, ListGroup, ListGroupItem, Spinner } from 'reactstrap';
 import CollectionItem from './CollectionItem';
+import AddCollectionModal from './AddCollectionModal';
 
-const CollectionList = () => {
-  const collections = [
-    'Class 1',
-    'Class 2',
-    'Class 3',
-    'Class 4',
-    'Class 5',
-    'Class 6'
-  ];
+import { getCollections } from '../../actions/collectionsActions';
 
+const CollectionList = ({
+  collections: { collections, loading },
+  getCollections
+}) => {
+  useEffect(() => {
+    getCollections();
+    // eslint-disable-next-line
+  }, []);
   const [modal, setModal] = useState(false);
-  const [name, setName] = useState('');
 
   const toggle = () => {
     setModal(!modal);
   };
 
-  const changeName = e => {
-    setName(e.value);
-  };
+  if (loading || collections === null) {
+    return <Spinner />;
+  }
 
   return (
     <div>
       <div className="list-section">
         <p>
-          {collections.length}
+          {!loading ? collections.length : 'No'}
           {' Collections'}
         </p>
         <Button color="danger" onClick={toggle}>
@@ -46,38 +37,34 @@ const CollectionList = () => {
         </Button>
       </div>
       <ListGroup>
-        {collections.map(collection => {
-          return <CollectionItem name={collection} />;
-        })}
+        {!loading && collections.length === 0 ? (
+          <ListGroupItem>
+            <h3>No collections to show</h3>
+          </ListGroupItem>
+        ) : (
+          collections.map(collection => {
+            return (
+              <CollectionItem name={collection.name} key={collection.id} />
+            );
+          })
+        )}
       </ListGroup>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Create a Collection</ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="name">Collection Name:</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Class A"
-                onChange={changeName}
-                value={name}
-              />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Create
-          </Button>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <AddCollectionModal modal={modal} toggle={toggle} />
     </div>
   );
 };
 
-export default CollectionList;
+CollectionList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  collections: PropTypes.object.isRequired,
+  getCollections: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  collections: state.collections
+});
+
+export default connect(
+  mapStateToProps,
+  { getCollections }
+)(CollectionList);
