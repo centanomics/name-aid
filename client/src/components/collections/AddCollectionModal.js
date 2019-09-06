@@ -10,18 +10,46 @@ import {
   Input,
   Button
 } from 'reactstrap';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Toasts from './Toasts';
+import { addCollection } from '../../actions/collectionsActions';
 
-const AddCollectionModal = ({ modal, toggle }) => {
+const AddCollectionModal = ({ modal, toggle, addCollection }) => {
   const [name, setName] = useState('');
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState('');
+
   const changeName = e => {
-    setName(e.value);
+    setName(e.target.value);
+  };
+
+  const showToggle = message => {
+    setMsg(message);
+    setShow(!show);
+    setTimeout(() => setShow(false), 5000);
+  };
+
+  const onSubmit = () => {
+    if (name === '') {
+      showToggle('Please enter a name for your collection');
+    } else {
+      const newCollection = {
+        name
+      };
+
+      addCollection(newCollection);
+
+      setName('');
+      toggle();
+    }
   };
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Create a Collection</ModalHeader>
       <ModalBody>
         <Form>
+          <Toasts message={msg} open={show} />
           <FormGroup>
             <Label for="name">Collection Name:</Label>
             <Input
@@ -36,7 +64,7 @@ const AddCollectionModal = ({ modal, toggle }) => {
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={toggle}>
+        <Button color="primary" onClick={onSubmit}>
           Create
         </Button>
         <Button color="secondary" onClick={toggle}>
@@ -49,7 +77,11 @@ const AddCollectionModal = ({ modal, toggle }) => {
 
 AddCollectionModal.propTypes = {
   modal: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  addCollection: PropTypes.func.isRequired
 };
 
-export default AddCollectionModal;
+export default connect(
+  null,
+  { addCollection }
+)(AddCollectionModal);

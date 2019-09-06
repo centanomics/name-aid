@@ -22,7 +22,19 @@ export default (state = initialState, action) => {
         loading: false
       };
     case ADD_COLLECTION:
+      return {
+        ...state,
+        collections: [...state.collections, action.payload],
+        loading: false
+      };
     case DELETE_COLLECTION:
+      return {
+        ...state,
+        collections: state.collections.filter(
+          collection => collection.id !== action.payload
+        ),
+        loading: false
+      };
     case UPDATE_COLLECTION:
     case COLLECTIONS_ERROR:
       // eslint-disable-next-line no-console

@@ -16,6 +16,7 @@
   "parser": "babel-eslint",
   "plugins": ["react", "jsx-a11y", "prettier"],
   "rules": {
+    "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -28,6 +29,7 @@
     // "indent": ["error", 2],
     "no-const-assign": "warn",
     "no-extra-semi": "error",
+    "no-shadow": "off",
     "no-this-before-super": "warn",
     "no-undef": "warn",
     "no-unreachable": "warn",

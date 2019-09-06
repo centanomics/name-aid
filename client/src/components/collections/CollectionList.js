@@ -44,7 +44,11 @@ const CollectionList = ({
         ) : (
           collections.map(collection => {
             return (
-              <CollectionItem name={collection.name} key={collection.id} />
+              <CollectionItem
+                name={collection.name}
+                key={collection.id}
+                id={collection.id}
+              />
             );
           })
         )}
@@ -55,7 +59,6 @@ const CollectionList = ({
 };
 
 CollectionList.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   collections: PropTypes.object.isRequired,
   getCollections: PropTypes.func.isRequired
 };
