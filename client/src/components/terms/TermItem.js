@@ -2,7 +2,8 @@ import React from 'react';
 import { ListGroupItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const TermItem = ({ name, origin }) => {
+const TermItem = term => {
+  const { name, origin } = term;
   return (
     <ListGroupItem to="/term">
       <h3>{name}</h3>
@@ -12,9 +13,8 @@ const TermItem = ({ name, origin }) => {
   );
 };
 
-export default TermItem;
-
 TermItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  origin: PropTypes.string.isRequired
+  term: PropTypes.object.isRequired
 };
+
+export default TermItem;

@@ -38,7 +38,48 @@ export const getTerms = id => async dispatch => {
 };
 
 // adds a term
+export const addTerm = term => async dispatch => {
+  try {
+    setLoading();
+    const res = await fetch(
+      'https://endpoint.yourcode.app/semyers189/api/terms',
+      {
+        method: 'POST',
+        body: JSON.stringify(term),
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    const data = await res.json();
+    dispatch({
+      type: ADD_TERM,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: TERMS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
 
 // deletes a term
+
+export const deleteTerm = id => async dispatch => {
+  try {
+    setLoading();
+    await fetch(`https://endpoint.yourcode.app/semyers189/api/terms/${id}`, {
+      method: 'DELETE'
+    });
+    dispatch({
+      type: DELETE_TERM,
+      payload: id
+    });
+  } catch (err) {
+    dispatch({
+      type: TERMS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
 
 // updates a term

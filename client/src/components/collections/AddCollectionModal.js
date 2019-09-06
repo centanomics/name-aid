@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Toasts from './Toasts';
+import Toasts from '../layout/Toasts';
 import { addCollection } from '../../actions/collectionsActions';
 
 const AddCollectionModal = ({ modal, toggle, addCollection }) => {

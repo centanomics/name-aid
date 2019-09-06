@@ -19,6 +19,7 @@ const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
 
   useEffect(() => {
     getTerms(match.params.id);
+    // eslint-disable-next-line
   }, []);
 
   const [modal, setModal] = useState(false);
@@ -49,13 +50,15 @@ const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
           </ListGroupItem>
         ) : (
           terms.map(term => {
-            return (
-              <TermItem name={term.name} origin={term.origin} key={term.id} />
-            );
+            return <TermItem term={term} key={term.id} />;
           })
         )}
       </ListGroup>
-      <AddTermModal modal={modal} toggle={toggle} />
+      <AddTermModal
+        modal={modal}
+        toggle={toggle}
+        id={Number(match.params.id)}
+      />
     </div>
   );
 };

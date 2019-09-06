@@ -22,7 +22,17 @@ export default (state = initialState, action) => {
         loading: false
       };
     case ADD_TERM:
+      return {
+        ...state,
+        terms: [...state.terms, action.payload],
+        loading: false
+      };
     case DELETE_TERM:
+      return {
+        ...state,
+        terms: state.terms.filter(term => term.id !== action.payload),
+        loading: false
+      };
     case UPDATE_TERM:
     case SET_LOADING:
       return {

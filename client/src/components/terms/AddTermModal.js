@@ -10,23 +10,54 @@ import {
   Label,
   Input
 } from 'reactstrap';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Toasts from '../layout/Toasts';
+import { addTerm } from '../../actions/termsActions';
 
-const AddTermModal = ({ modal, toggle }) => {
+const AddTermModal = ({ modal, toggle, id, addTerm }) => {
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState('');
   const [term, setTerm] = useState({
     name: '',
     origin: ''
   });
 
+  const showToggle = message => {
+    setMsg(message);
+    setShow(!show);
+    setTimeout(() => setShow(false), 5000);
+  };
+
   const { name, origin } = term;
 
   const onChange = e => setTerm({ ...term, [e.target.name]: e.target.value });
+
+  const onSubmit = () => {
+    if (name === '' || origin === '') {
+      showToggle('Please enter a name and origin.');
+    } else {
+      const newTerm = {
+        name,
+        origin,
+        collectionId: id
+      };
+
+      addTerm(newTerm);
+      setTerm({
+        name: '',
+        origin: ''
+      });
+      toggle();
+    }
+  };
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Add a Name</ModalHeader>
       <ModalBody>
         <Form>
+          <Toasts message={msg} open={show} />
           <FormGroup>
             <Label for="name">Name:</Label>
             <Input
@@ -52,7 +83,7 @@ const AddTermModal = ({ modal, toggle }) => {
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={toggle}>
+        <Button color="primary" onClick={onSubmit}>
           Create
         </Button>
         <Button color="secondary" onClick={toggle}>
@@ -65,7 +96,12 @@ const AddTermModal = ({ modal, toggle }) => {
 
 AddTermModal.propTypes = {
   modal: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  addTerm: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired
 };
 
-export default AddTermModal;
+export default connect(
+  null,
+  { addTerm }
+)(AddTermModal);
