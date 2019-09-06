@@ -1,48 +1,41 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  ListGroup
-} from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Button, ListGroup, ListGroupItem, Spinner } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import TermItem from './TermItem';
+import AddTermModal from './AddTermModal';
 
-const TermList = () => {
-  const collections = [
-    { name: 'Riley-Jay Shelton', origin: 'American' },
-    { name: 'Gordon Dunkley', origin: 'American' },
-    { name: 'Jarvis Mair', origin: 'American' },
-    { name: 'Ismael Swift', origin: 'American' },
-    { name: 'Ailish Griffin', origin: 'American' }
-  ];
+import { getTerms } from '../../actions/termsActions';
+
+const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
+  // const collections = [
+  //   { name: 'Riley-Jay Shelton', origin: 'American' },
+  //   { name: 'Gordon Dunkley', origin: 'American' },
+  //   { name: 'Jarvis Mair', origin: 'American' },
+  //   { name: 'Ismael Swift', origin: 'American' },
+  //   { name: 'Ailish Griffin', origin: 'American' }
+  // ];
+
+  useEffect(() => {
+    getTerms(match.params.id);
+  }, []);
 
   const [modal, setModal] = useState(false);
-  const [name, setName] = useState('');
-  const [origin, setOrigin] = useState('');
 
   const toggle = () => {
     setModal(!modal);
   };
 
-  const changeName = e => {
-    setName(e.value);
-  };
-
-  const changeOrigin = e => {
-    setOrigin(e.value);
-  };
+  if (loading || terms === null) {
+    return <Spinner />;
+  }
 
   return (
     <div>
       <div className="list-section">
         <p>
-          {collections.length}
+          {terms.length}
           {' Names'}
         </p>
         <Button color="danger" onClick={toggle}>
@@ -50,49 +43,34 @@ const TermList = () => {
         </Button>
       </div>
       <ListGroup>
-        {collections.map(collection => {
-          return <TermItem name={collection.name} origin={collection.origin} />;
-        })}
+        {!loading && terms.length === 0 ? (
+          <ListGroupItem>
+            <h3>No terms to show for this collection</h3>
+          </ListGroupItem>
+        ) : (
+          terms.map(term => {
+            return (
+              <TermItem name={term.name} origin={term.origin} key={term.id} />
+            );
+          })
+        )}
       </ListGroup>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Add a Name</ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="name">Name:</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="John Doe"
-                onChange={changeName}
-                value={name}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="origin">Origin:</Label>
-              <Input
-                type="text"
-                name="origin"
-                id="origin"
-                placeholder="English"
-                onChange={changeOrigin}
-                value={origin}
-              />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Create
-          </Button>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <AddTermModal modal={modal} toggle={toggle} />
     </div>
   );
 };
 
-export default TermList;
+TermList.propTypes = {
+  terms: PropTypes.object.isRequired,
+  getTerms: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  terms: state.terms
+});
+
+export default connect(
+  mapStateToProps,
+  { getTerms }
+)(withRouter(TermList));

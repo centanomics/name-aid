@@ -20,7 +20,7 @@ const CollectionItem = ({ collection, deleteCollection }) => {
 
   return (
     <ListGroupItem>
-      <RRNavLink to="/term">
+      <RRNavLink to={`/term/${id}`}>
         <h3>{name}</h3>
       </RRNavLink>
       <div>

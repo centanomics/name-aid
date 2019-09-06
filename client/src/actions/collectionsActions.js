@@ -1,9 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import {
   GET_COLLECTIONS,
-  // ADD_COLLECTION,
-  // DELETE_COLLECTION,
-  // UPDATE_COLLECTION,
   COLLECTIONS_ERROR,
   SET_LOADING,
   ADD_COLLECTION,
