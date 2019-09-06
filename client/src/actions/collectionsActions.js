@@ -7,7 +7,8 @@ import {
   COLLECTIONS_ERROR,
   SET_LOADING,
   ADD_COLLECTION,
-  DELETE_COLLECTION
+  DELETE_COLLECTION,
+  UPDATE_COLLECTION
 } from './types';
 
 // sets loading to true
@@ -88,3 +89,29 @@ export const deleteCollection = id => async dispatch => {
 };
 
 // update a collection
+
+export const updateCollection = collection => async dispatch => {
+  try {
+    setLoading();
+    const res = await fetch(
+      `https://endpoint.yourcode.app/semyers189/api/collections/${collection.id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(collection),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    const data = await res.json();
+    dispatch({
+      type: UPDATE_COLLECTION,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: COLLECTIONS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};

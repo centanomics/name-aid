@@ -36,6 +36,13 @@ export default (state = initialState, action) => {
         loading: false
       };
     case UPDATE_COLLECTION:
+      return {
+        ...state,
+        collections: state.collections.map(collection =>
+          collection.id === action.payload.id ? action.payload : collection
+        ),
+        loading: false
+      };
     case COLLECTIONS_ERROR:
       // eslint-disable-next-line no-console
       console.error(action.payload);

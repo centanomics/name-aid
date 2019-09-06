@@ -44,11 +44,7 @@ const CollectionList = ({
         ) : (
           collections.map(collection => {
             return (
-              <CollectionItem
-                name={collection.name}
-                key={collection.id}
-                id={collection.id}
-              />
+              <CollectionItem collection={collection} key={collection.id} />
             );
           })
         )}
