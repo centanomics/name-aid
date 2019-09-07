@@ -83,3 +83,30 @@ export const deleteTerm = id => async dispatch => {
 };
 
 // updates a term
+
+export const updateTerm = term => async dispatch => {
+  try {
+    setLoading();
+    const res = await fetch(
+      `https://endpoint.yourcode.app/semyers189/api/terms/${term.id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(term),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+    dispatch({
+      type: UPDATE_TERM,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: TERMS_ERROR,
+      payload: err.response
+    });
+  }
+};

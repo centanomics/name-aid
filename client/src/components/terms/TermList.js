@@ -9,14 +9,6 @@ import AddTermModal from './AddTermModal';
 import { getTerms } from '../../actions/termsActions';
 
 const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
-  // const collections = [
-  //   { name: 'Riley-Jay Shelton', origin: 'American' },
-  //   { name: 'Gordon Dunkley', origin: 'American' },
-  //   { name: 'Jarvis Mair', origin: 'American' },
-  //   { name: 'Ismael Swift', origin: 'American' },
-  //   { name: 'Ailish Griffin', origin: 'American' }
-  // ];
-
   useEffect(() => {
     getTerms(match.params.id);
     // eslint-disable-next-line

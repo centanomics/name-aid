@@ -34,6 +34,13 @@ export default (state = initialState, action) => {
         loading: false
       };
     case UPDATE_TERM:
+      return {
+        ...state,
+        terms: state.terms.map(term =>
+          term.id === action.payload.id ? action.payload : term
+        ),
+        loading: false
+      };
     case SET_LOADING:
       return {
         ...state,
