@@ -32,3 +32,10 @@ export const SET_CURRENT_TERM = 'SET_CURRENT_TERM';
 export const CLEAR_CURRENT_TERM = 'CLEAR_CURRENT_TERM';
 export const UPDATE_TERM = 'UPDATE_LOG';
 export const TERMS_ERROR = 'TERMS_ERROR';
+
+// shared collections
+
+export const GET_SHARED = 'GET_SHARED';
+export const ADD_SHARED = 'ADD_SHARED';
+export const DELETE_SHARED = 'DELETE_SHARED';
+export const SHARE_ERROR = 'SHARE_ERROR';
