@@ -98,7 +98,6 @@ export const updateTerm = term => async dispatch => {
       }
     );
     const data = await res.json();
-    console.log(data);
     dispatch({
       type: UPDATE_TERM,
       payload: data

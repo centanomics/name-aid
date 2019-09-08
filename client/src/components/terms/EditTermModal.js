@@ -82,7 +82,7 @@ const EditTermModal = ({ modal, toggle, terms, updateTerm }) => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={onSubmit}>
-          Create
+          Update
         </Button>
         <Button color="secondary" onClick={toggle}>
           Cancel
