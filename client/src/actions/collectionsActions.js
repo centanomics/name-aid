@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   GET_COLLECTIONS,
   COLLECTIONS_ERROR,
