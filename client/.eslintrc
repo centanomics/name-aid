@@ -16,6 +16,7 @@
   "parser": "babel-eslint",
   "plugins": ["react", "jsx-a11y", "prettier"],
   "rules": {
+    "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -25,9 +26,11 @@
     "constructor-super": "warn",
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
+    "import/prefer-default-export": "off",
     // "indent": ["error", 2],
     "no-const-assign": "warn",
     "no-extra-semi": "error",
+    "no-shadow": "off",
     "no-this-before-super": "warn",
     "no-undef": "warn",
     "no-unreachable": "warn",
