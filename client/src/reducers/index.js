@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-// import authReducer from './authReducer';
+import authReducer from './authReducer';
 import termsReducer from './termsReducer';
 import collectionsReducer from './collectionsReducer';
-// import sharedReducer from './sharedReducer';
+import sharedReducer from './sharedReducer';
 
 export default combineReducers({
-  // auth: authReducer,
+  auth: authReducer,
   terms: termsReducer,
-  collections: collectionsReducer
-  // shared: sharedReducer
+  collections: collectionsReducer,
+  shared: sharedReducer
 });

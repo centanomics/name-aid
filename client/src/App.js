@@ -17,6 +17,7 @@ import UserHome from './components/pages/UserHome';
 import Collections from './components/pages/Collections';
 import Terms from './components/pages/Terms';
 import NotFound from './components/pages/NotFound';
+import SharedCollections from './components/pages/SharedCollections';
 
 import './App.css';
 
@@ -35,6 +36,7 @@ const App = () => {
               <Route exact path="/home" component={UserHome} />
               <Route exact path="/collections" component={Collections} />
               <Route exact path="/term/:id" component={Terms} />
+              <Route exact path="/shared" component={SharedCollections} />
               <Route component={NotFound} />
             </Switch>
             <Footer />
