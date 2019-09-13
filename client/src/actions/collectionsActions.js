@@ -30,7 +30,7 @@ export const getCollections = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err.response.statusText
+      payload: err.response
     });
   }
 };
@@ -56,7 +56,7 @@ export const addCollection = collection => async dispatch => {
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err.response.statusText
+      payload: err.response
     });
   }
 };
@@ -79,7 +79,7 @@ export const deleteCollection = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err.response.statusText
+      payload: err.response
     });
   }
 };
@@ -100,6 +100,7 @@ export const updateCollection = collection => async dispatch => {
       }
     );
     const data = await res.json();
+    console.log(data);
     dispatch({
       type: UPDATE_COLLECTION,
       payload: data
@@ -107,7 +108,7 @@ export const updateCollection = collection => async dispatch => {
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err.response.statusText
+      payload: err.response
     });
   }
 };
