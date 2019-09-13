@@ -100,7 +100,6 @@ export const updateCollection = collection => async dispatch => {
       }
     );
     const data = await res.json();
-    console.log(data);
     dispatch({
       type: UPDATE_COLLECTION,
       payload: data

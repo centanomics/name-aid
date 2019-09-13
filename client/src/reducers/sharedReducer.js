@@ -43,6 +43,7 @@ export default (state = initialState, action) => {
       // eslint-disable-next-line no-console
       console.error(action.payload);
       return {
+        ...state,
         err: action.payload
       };
     default:
