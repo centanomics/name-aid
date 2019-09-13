@@ -6,34 +6,51 @@ import {
   SHARE_ERROR
 } from '../actions/types';
 
+import { updateObject, addItemToArray, deleteItemFromArray } from './utility';
+
 const initialState = {
   loading: false,
-  sharedCollections: null,
+  sharedCollections: [],
   error: null
+};
+
+// get
+
+const getShared = (state, action) => {
+  return updateObject(state, {
+    sharedCollections: action.payload,
+    loading: false
+  });
+};
+
+// add
+
+const addShared = (state, action) => {
+  const newCollection = addItemToArray(state.collections, action.payload);
+  return updateObject(state, {
+    sharedCollections: newCollection,
+    loading: false
+  });
+};
+
+// delete
+
+const deleteShared = (state, action) => {
+  const deletedItem = deleteItemFromArray(state.collections, action.payload);
+  return updateObject(state, {
+    sharedCollections: deletedItem,
+    loading: false
+  });
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_SHARED:
-      return {
-        ...state,
-        sharedCollections: action.payload,
-        loading: false
-      };
+      return getShared(state, action);
     case ADD_SHARED:
-      return {
-        ...state,
-        sharedCollections: [...state.sharedCollections, action.payload],
-        loading: false
-      };
+      return addShared(state, action);
     case DELETE_SHARED:
-      return {
-        ...state,
-        sharedCollections: state.sharedCollections.filter(
-          shared => shared.id !== action.payload
-        ),
-        loading: false
-      };
+      return deleteShared(state, action);
     case SET_LOADING:
       return {
         ...state,
