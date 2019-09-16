@@ -1,7 +1,7 @@
 import {
   GET_COLLECTIONS,
   COLLECTIONS_ERROR,
-  SET_LOADING,
+  SET_COLLECTION_LOADING,
   ADD_COLLECTION,
   DELETE_COLLECTION,
   UPDATE_COLLECTION
@@ -10,36 +10,38 @@ import {
 // sets loading to true
 export const setLoading = () => {
   return {
-    type: SET_LOADING
+    type: SET_COLLECTION_LOADING
   };
 };
 
 // get collections
 
 export const getCollections = () => async dispatch => {
+  let data;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       'https://endpoint.yourcode.app/semyers189/api/collections'
     );
-    const data = await res.json();
-    dispatch({
-      type: GET_COLLECTIONS,
-      payload: data
-    });
+    data = await res.json();
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err.response
+      payload: err
     });
   }
+  dispatch({
+    type: GET_COLLECTIONS,
+    payload: data
+  });
 };
 
 // add a collection
 
 export const addCollection = collection => async dispatch => {
+  let data;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       'https://endpoint.yourcode.app/semyers189/api/collections',
       {
@@ -48,47 +50,48 @@ export const addCollection = collection => async dispatch => {
         headers: { 'Content-Type': 'application/json' }
       }
     );
-    const data = await res.json();
-    dispatch({
-      type: ADD_COLLECTION,
-      payload: data
-    });
+    data = await res.json();
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
+  dispatch({
+    type: ADD_COLLECTION,
+    payload: data
+  });
 };
 
 // delete a collection
 
 export const deleteCollection = id => async dispatch => {
   try {
-    setLoading();
+    dispatch(setLoading());
     await fetch(
       `https://endpoint.yourcode.app/semyers189/api/collections/${id}`,
       {
         method: 'DELETE'
       }
     );
-    dispatch({
-      type: DELETE_COLLECTION,
-      payload: id
-    });
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
+  dispatch({
+    type: DELETE_COLLECTION,
+    payload: id
+  });
 };
 
 // update a collection
 
 export const updateCollection = collection => async dispatch => {
+  let data;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       `https://endpoint.yourcode.app/semyers189/api/collections/${collection.id}`,
       {
@@ -99,15 +102,15 @@ export const updateCollection = collection => async dispatch => {
         }
       }
     );
-    const data = await res.json();
-    dispatch({
-      type: UPDATE_COLLECTION,
-      payload: data
-    });
+    data = await res.json();
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
+  dispatch({
+    type: UPDATE_COLLECTION,
+    payload: data
+  });
 };

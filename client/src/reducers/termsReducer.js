@@ -1,13 +1,4 @@
 import {
-  GET_TERMS,
-  ADD_TERM,
-  DELETE_TERM,
-  UPDATE_TERM,
-  SET_LOADING,
-  TERMS_ERROR
-} from '../actions/types';
-
-import {
   updateObject,
   addItemToArray,
   deleteItemFromArray,
@@ -20,6 +11,14 @@ const initialState = {
   error: null
 };
 
+function createReducer(initialState, handlers) {
+  return function reducer(state = initialState, action) {
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action);
+    }
+    return state;
+  };
+}
 // get
 
 const getTerms = (state, action) => {
@@ -68,29 +67,32 @@ const updateTerm = (state, action) => {
   });
 };
 
+// error
+
+const errors = (state, action) => {
+  // eslint-disable-next-line no-console
+  console.error(action.payload);
+  return updateObject(state, {
+    err: action.payload
+  });
+};
+
+// set loading
+const setLoading = state => {
+  return updateObject(state, {
+    loading: true
+  });
+};
+
+const termReducer = createReducer([], {
+  GET_TERMS: getTerms,
+  ADD_TERM: addTerm,
+  DELETE_TERM: deleteTerm,
+  UPDATE_TERM: updateTerm,
+  SET_LOADING: setLoading,
+  TERMS_ERROR: errors
+});
+
 export default (state = initialState, action) => {
-  switch (action.type) {
-    case GET_TERMS:
-      return getTerms(state, action);
-    case ADD_TERM:
-      return addTerm(state, action);
-    case DELETE_TERM:
-      return deleteTerm(state, action);
-    case UPDATE_TERM:
-      return updateTerm(state, action);
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true
-      };
-    case TERMS_ERROR:
-      // eslint-disable-next-line no-console
-      console.error(action.payload);
-      return {
-        ...state,
-        err: action.payload
-      };
-    default:
-      return state;
-  }
+  return termReducer(state, action);
 };

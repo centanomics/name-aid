@@ -1,12 +1,4 @@
 // normalized reducer
-import {
-  GET_COLLECTIONS,
-  ADD_COLLECTION,
-  DELETE_COLLECTION,
-  UPDATE_COLLECTION,
-  COLLECTIONS_ERROR,
-  SET_LOADING
-} from '../actions/types';
 
 import {
   updateObject,
@@ -20,6 +12,15 @@ const initialState = {
   loading: false,
   error: null
 };
+
+function createReducer(initialState, handlers) {
+  return function reducer(state = initialState, action) {
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action);
+    }
+    return state;
+  };
+}
 
 // get
 
@@ -66,29 +67,32 @@ const updateCollection = (state, action) => {
   });
 };
 
+// error
+
+const errors = (state, action) => {
+  // eslint-disable-next-line no-console
+  console.error(action.payload);
+  return updateObject(state, {
+    error: action.payload
+  });
+};
+
+// set loading
+const setLoading = state => {
+  return updateObject(state, {
+    loading: true
+  });
+};
+
+const collectionReducer = createReducer([], {
+  GET_COLLECTIONS: getCollections,
+  ADD_COLLECTION: addCollection,
+  DELETE_COLLECTION: deleteCollection,
+  UPDATE_COLLECTION: updateCollection,
+  COLLECTIONS_ERROR: errors,
+  SET_COLLECTION_LOADING: setLoading
+});
+
 export default (state = initialState, action) => {
-  switch (action.type) {
-    case GET_COLLECTIONS:
-      return getCollections(state, action);
-    case ADD_COLLECTION:
-      return addCollection(state, action);
-    case DELETE_COLLECTION:
-      return deleteCollection(state, action);
-    case UPDATE_COLLECTION:
-      return updateCollection(state, action);
-    case COLLECTIONS_ERROR:
-      // eslint-disable-next-line no-console
-      console.error(action.payload);
-      return {
-        ...state,
-        err: action.payload
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true
-      };
-    default:
-      return state;
-  }
+  return collectionReducer(state, action);
 };

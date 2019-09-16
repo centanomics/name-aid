@@ -40,7 +40,8 @@
     "semi": ["error", "always"],
     "valid-typeof": "warn",
     "prefer-object-spread": "off",
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off"
   },
   "globals": {
     "window": true,
