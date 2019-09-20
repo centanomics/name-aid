@@ -1,19 +1,9 @@
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.getAllCollections = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.getOneCollection = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.addCollection = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.updateCollection = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.deleteCollection = () => {};

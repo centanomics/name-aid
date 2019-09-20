@@ -1,3 +1,29 @@
 const router = require('express').Router();
+const collectionCtrl = require('../controllers/collections');
+
+// @route     GET api/collections
+// @desc      get all collections
+// @access    Private
+router.get('/collections', collectionCtrl.getAllCollections);
+
+// @route     GET api/collections/:id
+// @desc      get one collection
+// @access    Private
+router.get('/collections/:id', collectionCtrl.getOneCollection);
+
+// @route     POST api/collections
+// @desc      add a collection
+// @access    Private
+router.post('/collections', collectionCtrl.addCollection);
+
+// @route     PUT api/collections/:id
+// @desc      update a collection by id
+// @access    Private
+router.put('/collections/:id', collectionCtrl.updateCollection);
+
+// @route     DELETE api/collections/:id
+// @desc      delete a collection by id
+// @access    Private
+router.delete('/collections/:id', collectionCtrl.deleteCollection);
 
 module.exports = router;
