@@ -1,19 +1,9 @@
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.getAllTerms = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.getOneTerm = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.addTerm = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.updateTerm = () => {};
 
-// @route     POST api/users
-// @desc      Register a user
-// @access    Public
+exports.deleteTerm = () => {};
