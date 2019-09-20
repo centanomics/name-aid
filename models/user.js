@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         allowNull: false,
         type: DataTypes.STRING
+      },
+      reset_token: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      reset_expires: {
+        type: DataTypes.DATE,
+        allowNull: true
       }
     },
     {}
