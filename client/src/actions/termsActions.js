@@ -18,29 +18,31 @@ export const setLoading = () => {
 // gets terms
 
 export const getTerms = id => async dispatch => {
+  let output;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       'https://endpoint.yourcode.app/semyers189/api/terms'
     );
     const data = await res.json();
-    const output = await data.filter(term => term.collectionId === Number(id));
-    dispatch({
-      type: GET_TERMS,
-      payload: output
-    });
+    output = await data.filter(term => term.collectionId === Number(id));
   } catch (err) {
     dispatch({
       type: TERMS_ERROR,
       payload: err.response.statusText
     });
   }
+  dispatch({
+    type: GET_TERMS,
+    payload: output
+  });
 };
 
 // adds a term
 export const addTerm = term => async dispatch => {
+  let data;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       'https://endpoint.yourcode.app/semyers189/api/terms',
       {
@@ -49,24 +51,24 @@ export const addTerm = term => async dispatch => {
         headers: { 'Content-Type': 'application/json' }
       }
     );
-    const data = await res.json();
-    dispatch({
-      type: ADD_TERM,
-      payload: data
-    });
+    data = await res.json();
   } catch (err) {
     dispatch({
       type: TERMS_ERROR,
       payload: err.response.statusText
     });
   }
+  dispatch({
+    type: ADD_TERM,
+    payload: data
+  });
 };
 
 // deletes a term
 
 export const deleteTerm = id => async dispatch => {
   try {
-    setLoading();
+    dispatch(setLoading());
     await fetch(`https://endpoint.yourcode.app/semyers189/api/terms/${id}`, {
       method: 'DELETE'
     });
@@ -85,8 +87,9 @@ export const deleteTerm = id => async dispatch => {
 // updates a term
 
 export const updateTerm = term => async dispatch => {
+  let data;
   try {
-    setLoading();
+    dispatch(setLoading());
     const res = await fetch(
       `https://endpoint.yourcode.app/semyers189/api/terms/${term.id}`,
       {
@@ -97,15 +100,15 @@ export const updateTerm = term => async dispatch => {
         }
       }
     );
-    const data = await res.json();
-    dispatch({
-      type: UPDATE_TERM,
-      payload: data
-    });
+    data = await res.json();
   } catch (err) {
     dispatch({
       type: TERMS_ERROR,
       payload: err.response
     });
   }
+  dispatch({
+    type: UPDATE_TERM,
+    payload: data
+  });
 };

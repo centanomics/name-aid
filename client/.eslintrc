@@ -38,7 +38,10 @@
     "prettier/prettier": "error",
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "valid-typeof": "warn"
+    "valid-typeof": "warn",
+    "prefer-object-spread": "off",
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off"
   },
   "globals": {
     "window": true,
