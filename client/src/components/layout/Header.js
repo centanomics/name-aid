@@ -46,6 +46,11 @@ const Header = props => {
         </NavLink>
       </NavItem>
       <NavItem>
+        <NavLink tag={RRNavLink} to="/shared" activeClassName="selected">
+          Shared Items
+        </NavLink>
+      </NavItem>
+      <NavItem>
         <NavLink onClick={logOut} tag={RRNavLink} to="#">
           Logout
         </NavLink>
