@@ -12,6 +12,20 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+    return queryInterface.bulkInsert(
+      'Terms',
+      [
+        {
+          id: 'cabca651-2a0c-4044-b0ba-0b0fd445e167',
+          name: 'Shannon',
+          origin: 'Irish',
+          collectionId: '2e889544-2837-4fdd-b00c-42bf500acf6e',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ],
+      {}
+    );
   },
 
   down: (queryInterface, Sequelize) => {
@@ -22,5 +36,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
+    return queryInterface.bulkDelete('Terms', null, {});
   }
 };

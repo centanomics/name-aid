@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID
       },
       favorite: {
-        type: DataTypes.ENUM(true, false),
+        type: DataTypes.ENUM('true', 'false'),
         validate: {
           isIn: {
             args: [[true, false]],

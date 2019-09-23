@@ -13,26 +13,17 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert(
-      'Users',
+      'Shares',
       [
         {
-          id: '1d92f659-9c3f-4111-bff8-c0b0ced7f108',
-          email: 'shannonemyers189@gmail.com',
-          name: 'Shannon Myers',
-          password: '123456',
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          id: '3bd0dd25-abad-416b-acbc-0bef76d3b4cd',
-          email: 'datguycomputers@gmail.com',
-          name: 'Kevin Myers',
-          password: '1234567',
+          id: '38abcba4-45c2-413b-bf70-45aeb8d65b0a',
+          collectionId: '7043fc48-9383-4e6f-b6b9-684d95283d90',
+          userId: '1d92f659-9c3f-4111-bff8-c0b0ced7f108',
           createdAt: new Date(),
           updatedAt: new Date()
         }
       ],
-      { individualHooks: true }
+      {}
     );
   },
 
@@ -44,6 +35,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Shares', null, {});
   }
 };
