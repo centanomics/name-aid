@@ -28,14 +28,17 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       userId: {
-        allowNull: true,
-        type: DataTypes.UUID
+        type: DataTypes.UUID,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       favorite: {
         type: DataTypes.ENUM('true', 'false'),
         validate: {
           isIn: {
-            args: [[true, false]],
+            args: [['true', 'false']],
             msg: 'Collection must be either a favorite(true) or not(false)'
           }
         }
@@ -45,9 +48,9 @@ module.exports = (sequelize, DataTypes) => {
   );
   Collection.associate = function(models) {
     // associations can be defined here
-    Collection.hasMany(models.Term);
+    Collection.hasMany(models.Term, { foreignKey: 'collectionId' });
     Collection.hasMany(models.Share);
-    Collection.belongsTo(models.Users);
+    Collection.belongsTo(models.User, { foreignKey: 'userId' });
   };
   return Collection;
 };

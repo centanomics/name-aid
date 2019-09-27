@@ -46,11 +46,7 @@ const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
           })
         )}
       </ListGroup>
-      <AddTermModal
-        modal={modal}
-        toggle={toggle}
-        id={Number(match.params.id)}
-      />
+      <AddTermModal modal={modal} toggle={toggle} id={match.params.id} />
     </div>
   );
 };

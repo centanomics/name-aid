@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Term.associate = function(models) {
     // associations can be defined here
-    Term.belongsTo(models.Collection);
+    Term.belongsTo(models.Collection, { foreignKey: 'collectionId' });
   };
   return Term;
 };
