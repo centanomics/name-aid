@@ -3,10 +3,17 @@ import { ListGroupItem } from 'reactstrap';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteCollection } from '../../actions/collectionsActions';
+import {
+  deleteCollection,
+  setCurrentCollection
+} from '../../actions/collectionsActions';
 import EditCollectionModal from './EditCollectionModal';
 
-const CollectionItem = ({ collection, deleteCollection }) => {
+const CollectionItem = ({
+  collection,
+  deleteCollection,
+  setCurrentCollection
+}) => {
   const { name, id } = collection;
   const [modal, setModal] = useState(false);
 
@@ -18,9 +25,13 @@ const CollectionItem = ({ collection, deleteCollection }) => {
     deleteCollection(id);
   };
 
+  const setCurrentCol = () => {
+    setCurrentCollection(collection);
+  };
+
   return (
     <ListGroupItem>
-      <RRNavLink to={`/term/${id}`}>
+      <RRNavLink to={`/term/${id}`} onClick={setCurrentCol}>
         <h3>{name}</h3>
       </RRNavLink>
       <div>
@@ -43,10 +54,11 @@ const CollectionItem = ({ collection, deleteCollection }) => {
 
 CollectionItem.propTypes = {
   collection: PropTypes.object.isRequired,
-  deleteCollection: PropTypes.func.isRequired
+  deleteCollection: PropTypes.func.isRequired,
+  setCurrentCollection: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { deleteCollection }
+  { deleteCollection, setCurrentCollection }
 )(CollectionItem);

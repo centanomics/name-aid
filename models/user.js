@@ -35,7 +35,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         afterValidate: function(user) {
-          user.password = bcrypt.hashSync(user.password, 10);
+          console.log('user password before', user.password);
+          user.password = bcrypt.hashSync(user.password.toString(), 10);
+          console.log('user password after', user.password);
+        },
+        beforeUpdate: function(_record, _options) {
+          _options.validate = false;
         }
       }
     }

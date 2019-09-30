@@ -3,7 +3,9 @@ const { validationResult } = require('express-validator');
 
 exports.getAllCollections = async (req, res) => {
   try {
-    const collections = await Collection.findAll();
+    const collections = await Collection.findAll({
+      where: { userId: req.user.id }
+    });
     res.json(collections);
   } catch (err) {
     console.error(err.message);
@@ -36,7 +38,7 @@ exports.addCollection = async (req, res) => {
   try {
     const newCollection = await Collection.create({
       name,
-      userId: '1d92f659-9c3f-4111-bff8-c0b0ced7f108',
+      userId: req.user.id,
       favorite: 'false'
     });
     res.json({ newCollection });

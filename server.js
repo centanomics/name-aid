@@ -5,6 +5,7 @@ const cors = require('cors');
 const collectionRouter = require('./routes/collections');
 const termsRouter = require('./routes/terms');
 const sharedRouter = require('./routes/shared');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/collections', collectionRouter);
 app.use('/api/terms', termsRouter);
 app.use('/api/shared', sharedRouter);
+app.use('/api/auth', authRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

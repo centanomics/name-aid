@@ -1,13 +1,15 @@
 import axios from 'axios';
-import API from '../utils/API';
+// import API from '../utils/API';
 import {
   GET_COLLECTIONS,
   COLLECTIONS_ERROR,
   SET_COLLECTION_LOADING,
   ADD_COLLECTION,
   DELETE_COLLECTION,
-  UPDATE_COLLECTION
+  UPDATE_COLLECTION,
+  SET_CURRENT
 } from './types';
+import setAuthToken from '../utils/setAuthToken';
 
 const api = process.env.API_URL || 'http://localhost:9000';
 
@@ -21,12 +23,13 @@ export const setLoading = () => {
 // get collections
 
 export const getCollections = () => async dispatch => {
+  if (localStorage.token) setAuthToken(localStorage.token);
   try {
     dispatch(setLoading());
-    const data = await API.get('/api/collections');
+    const res = await axios.get(`${api}/api/collections`);
     dispatch({
       type: GET_COLLECTIONS,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
@@ -39,6 +42,7 @@ export const getCollections = () => async dispatch => {
 // add a collection
 
 export const addCollection = collection => async dispatch => {
+  if (localStorage.token) setAuthToken(localStorage.token);
   const { name } = collection;
   try {
     dispatch(setLoading());
@@ -94,4 +98,12 @@ export const updateCollection = collection => async dispatch => {
       payload: err.response
     });
   }
+};
+
+// set current collection
+export const setCurrentCollection = collection => async dispatch => {
+  dispatch({
+    type: SET_CURRENT,
+    payload: collection
+  });
 };

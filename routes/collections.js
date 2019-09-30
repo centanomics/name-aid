@@ -1,16 +1,17 @@
 const router = require('express').Router();
 const collectionCtrl = require('../controllers/collections');
 const { check } = require('express-validator');
+const auth = require('../middleware/auth');
 
 // @route     GET api/collections
 // @desc      get all collections
 // @access    Private
-router.get('/', collectionCtrl.getAllCollections);
+router.get('/', auth, collectionCtrl.getAllCollections);
 
 // @route     GET api/collections/:id
 // @desc      get one collection
 // @access    Private
-router.get('/:id', collectionCtrl.getOneCollection);
+router.get('/:id', auth, collectionCtrl.getOneCollection);
 
 // @route     POST api/collections
 // @desc      add a collection
@@ -18,9 +19,12 @@ router.get('/:id', collectionCtrl.getOneCollection);
 router.post(
   '/',
   [
-    check('name', 'Name is required')
-      .not()
-      .isEmpty()
+    auth,
+    [
+      check('name', 'Name is required')
+        .not()
+        .isEmpty()
+    ]
   ],
   collectionCtrl.addCollection
 );
@@ -31,9 +35,12 @@ router.post(
 router.put(
   '/:id',
   [
-    check('name', 'Name is required')
-      .not()
-      .isEmpty()
+    auth,
+    [
+      check('name', 'Name is required')
+        .not()
+        .isEmpty()
+    ]
   ],
   collectionCtrl.updateCollection
 );
@@ -41,6 +48,6 @@ router.put(
 // @route     DELETE api/collections/:id
 // @desc      delete a collection by id
 // @access    Private
-router.delete('/:id', collectionCtrl.deleteCollection);
+router.delete('/:id', auth, collectionCtrl.deleteCollection);
 
 module.exports = router;

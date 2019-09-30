@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import AuthState from './context/auth/AuthState';
+import setAuthToken from './utils/setAuthToken';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -18,31 +18,35 @@ import Collections from './components/pages/Collections';
 import Terms from './components/pages/Terms';
 import NotFound from './components/pages/NotFound';
 import SharedCollections from './components/pages/SharedCollections';
+import Forgot from './components/pages/Forgot';
+import Reset from './components/pages/Reset';
 
 import './App.css';
+
+if (localStorage.token) setAuthToken(localStorage.token);
 
 const App = () => {
   return (
     <Provider store={store}>
-      <AuthState>
-        <Router>
-          <div className="App">
-            <Header />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/home" component={UserHome} />
-              <Route exact path="/collections" component={Collections} />
-              <Route exact path="/term/:id" component={Terms} />
-              <Route exact path="/shared" component={SharedCollections} />
-              <Route component={NotFound} />
-            </Switch>
-            <Footer />
-          </div>
-        </Router>
-      </AuthState>
+      <Router>
+        <div className="App">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/collections" component={Collections} />
+            <Route exact path="/forgot" component={Forgot} />
+            <Route exact path="/auth/reset_password" component={Reset} />
+            <Route exact path="/term/:id" component={Terms} />
+            <Route exact path="/shared" component={SharedCollections} />
+            <Route component={NotFound} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
     </Provider>
   );
 };

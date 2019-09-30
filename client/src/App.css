@@ -117,6 +117,10 @@ h1 {
   align-content: center;
 }
 
+.list-section > button {
+  margin: 0;
+}
+
 /* list groups */
 
 .list-group-item {
