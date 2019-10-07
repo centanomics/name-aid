@@ -121,6 +121,12 @@ h1 {
   margin: 0;
 }
 
+.centerinput {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
 /* list groups */
 
 .list-group-item {

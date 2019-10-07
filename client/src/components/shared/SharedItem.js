@@ -5,29 +5,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteShared } from '../../actions/sharedActions';
 
-const SharedItem = ({ collection, deleteShared }) => {
+const SharedItem = ({ collection, deleteShared, ids }) => {
   const { name, id } = collection;
 
   const onClick = () => {
-    deleteShared(id);
+    deleteShared(ids);
   };
 
   return (
     <ListGroupItem>
-      <RRNavLink to={`/term/${id}`}>
+      <RRNavLink to={`/shared/${id}`}>
         <h3>{name}</h3>
       </RRNavLink>
       <button type="button" onClick={onClick}>
         <i className="fas fa-trash" />
       </button>
-      <i className="fas fa-share" />
     </ListGroupItem>
   );
 };
 
 SharedItem.propTypes = {
   collection: PropTypes.object.isRequired,
-  deleteShared: PropTypes.func.isRequired
+  deleteShared: PropTypes.func.isRequired,
+  ids: PropTypes.string.isRequired
 };
 
 export default connect(

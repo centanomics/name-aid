@@ -33,6 +33,7 @@ export const SET_CURRENT_TERM = 'SET_CURRENT_TERM';
 export const CLEAR_CURRENT_TERM = 'CLEAR_CURRENT_TERM';
 export const UPDATE_TERM = 'UPDATE_TERM';
 export const TERMS_ERROR = 'TERMS_ERROR';
+export const PLAY_TTS = 'PLAY_TTS';
 
 // shared collections
 

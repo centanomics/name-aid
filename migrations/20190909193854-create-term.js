@@ -21,6 +21,10 @@ module.exports = {
           column: 'id'
         }
       },
+      ipa: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -20,6 +20,7 @@ module.exports = {
           name: 'Shannon',
           origin: 'Irish',
           collectionId: '2e889544-2837-4fdd-b00c-42bf500acf6e',
+          ipa: 'ˈʃænən',
           createdAt: new Date(),
           updatedAt: new Date()
         }

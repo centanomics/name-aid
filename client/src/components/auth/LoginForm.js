@@ -19,9 +19,11 @@ const Login = ({ history, login, auth: { isAuthenticated, error } }) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    setMsg(error);
-    setShow(!show);
-    setTimeout(() => setShow(false), 5000);
+    if (error) {
+      setMsg(error);
+      setShow(!show);
+      setTimeout(() => setShow(false), 5000);
+    }
     // eslint-disable-next-line
   }, [error]);
   const [user, setUser] = useState({

@@ -1,5 +1,7 @@
 const { Term } = require('../models');
 const { validationResult } = require('express-validator');
+const googleTTS = require('google-tts-api');
+const transcribe = require('../utils/transcribe');
 const log = require('debug')('api:logging');
 
 exports.getAllTerms = async (req, res) => {
@@ -38,10 +40,18 @@ exports.addTerm = async (req, res) => {
   const { name, origin, collectionId } = req.body;
   log(collectionId, name, origin);
   try {
+    // const key = 'aa25a0f2-55f1-47ed-bf80-dccca1199bab';
+    // const resp = await axios.get(
+    //   `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${name}?key=${key}`
+    // );
+
+    const ipa = await transcribe(name);
+
     const newTerm = await Term.create({
       name,
       origin,
-      collectionId
+      collectionId,
+      ipa
     });
     res.json(newTerm);
   } catch (err) {
@@ -58,10 +68,18 @@ exports.updateTerm = async (req, res) => {
   const { name, origin } = req.body;
   const { id } = req.params;
   try {
+    // const key = 'aa25a0f2-55f1-47ed-bf80-dccca1199bab';
+    // const resp = await axios.get(
+    //   `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${name}?key=${key}`
+    // );
+
+    const ipa = await transcribe(name);
+
     await Term.update(
       {
         name,
-        origin
+        origin,
+        ipa
       },
       {
         where: { id }
@@ -80,6 +98,17 @@ exports.deleteTerm = async (req, res) => {
   try {
     await Term.destroy({ where: { id } });
     res.json({ msg: 'Contact Removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+exports.getTTS = async (req, res) => {
+  const { name } = req.body;
+  try {
+    const speechLink = await googleTTS(name, 'en', 1);
+    res.json(speechLink);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

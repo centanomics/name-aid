@@ -97,7 +97,7 @@ export const clearErrors = () => async dispatch => {
 // forgot password
 export const forgotPassword = email => async dispatch => {
   const res = await axios.post(`${api}/api/auth/forgot`, { email });
-  console.log(res);
+  // console.log(res);
 };
 
 // reset password

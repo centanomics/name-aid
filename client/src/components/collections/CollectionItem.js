@@ -8,6 +8,7 @@ import {
   setCurrentCollection
 } from '../../actions/collectionsActions';
 import EditCollectionModal from './EditCollectionModal';
+import CopyModal from './CopyModal';
 
 const CollectionItem = ({
   collection,
@@ -16,18 +17,14 @@ const CollectionItem = ({
 }) => {
   const { name, id } = collection;
   const [modal, setModal] = useState(false);
+  const [modal2, setModal2] = useState(false);
 
-  const toggle = () => {
-    setModal(!modal);
-  };
+  const toggle = () => setModal(!modal);
+  const toggleCopy = () => setModal2(!modal2);
 
-  const onClick = () => {
-    deleteCollection(id);
-  };
+  const onClick = () => deleteCollection(id);
 
-  const setCurrentCol = () => {
-    setCurrentCollection(collection);
-  };
+  const setCurrentCol = () => setCurrentCollection(collection);
 
   return (
     <ListGroupItem>
@@ -41,12 +38,21 @@ const CollectionItem = ({
         <button type="button" onClick={onClick}>
           <i className="fas fa-trash" />
         </button>
-        <i className="fas fa-share" />
+        {document.queryCommandSupported('copy') && (
+          <button type="button" onClick={toggleCopy}>
+            <i className="fas fa-share" />
+          </button>
+        )}
       </div>
       <EditCollectionModal
         modal={modal}
         toggle={toggle}
         collection={collection}
+      />
+      <CopyModal
+        modal={modal2}
+        toggle={toggleCopy}
+        link={`http://localhost:3000/shared/${id}`}
       />
     </ListGroupItem>
   );

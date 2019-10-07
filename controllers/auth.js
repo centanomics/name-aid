@@ -71,13 +71,23 @@ exports.registerUser = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, password } = req.body;
+  const { name, email, password, password2 } = req.body;
 
   try {
     let user = await User.findOne({ where: { email } });
 
     if (user) {
       res.status(400).json({ msg: 'User already exists' });
+    }
+
+    if (password !== password2) {
+      res.status(400).json({ msg: 'Passwords do not match' });
+    }
+
+    if (password.length < 6) {
+      res
+        .status(400)
+        .json({ msg: 'Password needs to be greated than 6 characters' });
     }
 
     user = await User.create({ name, email, password });

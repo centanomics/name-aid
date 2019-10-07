@@ -18,6 +18,7 @@ import Collections from './components/pages/Collections';
 import Terms from './components/pages/Terms';
 import NotFound from './components/pages/NotFound';
 import SharedCollections from './components/pages/SharedCollections';
+import Shared from './components/pages/Shared';
 import Forgot from './components/pages/Forgot';
 import Reset from './components/pages/Reset';
 
@@ -42,6 +43,7 @@ const App = () => {
             <Route exact path="/auth/reset_password" component={Reset} />
             <Route exact path="/term/:id" component={Terms} />
             <Route exact path="/shared" component={SharedCollections} />
+            <Route exatc path="/shared/:id" component={Shared} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

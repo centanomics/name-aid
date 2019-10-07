@@ -8,7 +8,8 @@ import {
 const initialState = {
   terms: [],
   loading: false,
-  error: null
+  error: null,
+  tts: null
 };
 
 function createReducer(initialState, handlers) {
@@ -84,12 +85,19 @@ const setLoading = state => {
   });
 };
 
+const playTTS = (state, action) => {
+  return updateObject(state, {
+    tts: action.payload
+  });
+};
+
 const termReducer = createReducer([], {
   GET_TERMS: getTerms,
   ADD_TERM: addTerm,
   DELETE_TERM: deleteTerm,
   UPDATE_TERM: updateTerm,
   SET_LOADING: setLoading,
+  PLAY_TTS: playTTS,
   TERMS_ERROR: errors
 });
 

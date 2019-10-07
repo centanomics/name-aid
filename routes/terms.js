@@ -56,4 +56,9 @@ router.put(
 // @access    Private
 router.delete('/:id', termCtrl.deleteTerm);
 
+// @route     POST api/terms/tts
+// @desc      gets the term
+// @access    Private
+router.post('/tts', termCtrl.getTTS);
+
 module.exports = router;

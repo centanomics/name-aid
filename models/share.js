@@ -17,21 +17,27 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      collectionId: {
-        allowNull: false,
-        type: DataTypes.UUID
-      },
       userId: {
-        allowNull: false,
-        type: DataTypes.UUID
+        type: DataTypes.UUID,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
+      collectionId: {
+        type: DataTypes.UUID,
+        references: {
+          model: 'Collections',
+          column: 'id'
+        }
       }
     },
     {}
   );
   Share.associate = function(models) {
     // associations can be defined here
-    Share.belongsTo(models.Collection);
-    Share.belongsTo(models.User);
+    Share.belongsTo(models.Collection, { foreignKey: 'collectionId' });
+    Share.belongsTo(models.User), { foreignKey: 'userId' };
   };
   return Share;
 };

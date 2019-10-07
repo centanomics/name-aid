@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
   Collection.associate = function(models) {
     // associations can be defined here
     Collection.hasMany(models.Term, { foreignKey: 'collectionId' });
-    Collection.hasMany(models.Share);
+    Collection.hasMany(models.Share, { foreignKey: 'collectionId' });
     Collection.belongsTo(models.User, { foreignKey: 'userId' });
   };
   return Collection;

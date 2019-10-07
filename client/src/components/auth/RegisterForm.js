@@ -5,14 +5,30 @@ import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
+import Toasts from '../layout/Toasts';
 
-const Register = ({ auth: { isAuthenticated }, history, registerUser }) => {
+const Register = ({
+  auth: { isAuthenticated, error },
+  history,
+  registerUser
+}) => {
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState('');
   useEffect(() => {
     if (isAuthenticated) {
       history.push('/home');
     }
     // eslint-disable-next-line
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (error) {
+      setMsg(error);
+      setShow(!show);
+      setTimeout(() => setShow(false), 5000);
+    }
+    // eslint-disable-next-line
+  }, [error]);
 
   const [user, setUser] = useState({
     name: '',
@@ -27,9 +43,9 @@ const Register = ({ auth: { isAuthenticated }, history, registerUser }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if (user.password === user.password2) {
-      registerUser(user);
-    }
+
+    registerUser(user);
+
     // eslint-disable-next-line react/prop-types
   };
 
@@ -37,6 +53,7 @@ const Register = ({ auth: { isAuthenticated }, history, registerUser }) => {
     <Form onSubmit={onSubmit} className="container">
       <h1>Create an Account</h1>
       <FormGroup>
+        <Toasts message={msg} open={show} />
         <Label for="name">Full Name:</Label>
         <Input
           type="text"

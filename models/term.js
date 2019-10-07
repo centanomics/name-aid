@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING
       },
+      ipa: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
       collectionId: {
         allowNull: false,
         type: DataTypes.UUID

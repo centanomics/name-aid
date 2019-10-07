@@ -2,7 +2,9 @@ import { updateObject, addItemToArray, deleteItemFromArray } from './utility';
 
 const initialState = {
   loading: false,
+  currentShared: null,
   sharedCollections: [],
+  sharedTerms: [],
   error: null
 };
 
@@ -27,8 +29,13 @@ const getShared = (state, action) => {
 // add
 
 const addShared = (state, action) => {
-  const newCollection = addItemToArray(state.collections, action.payload);
+  const newCollection = addItemToArray(
+    state.sharedCollections,
+    action.payload.collection
+  );
   return updateObject(state, {
+    currentShared: action.payload.collection,
+    sharedTerms: action.payload.terms,
     sharedCollections: newCollection,
     loading: false
   });
@@ -37,7 +44,10 @@ const addShared = (state, action) => {
 // delete
 
 const deleteShared = (state, action) => {
-  const deletedItem = deleteItemFromArray(state.collections, action.payload);
+  const deletedItem = deleteItemFromArray(
+    state.sharedCollections,
+    action.payload
+  );
   return updateObject(state, {
     sharedCollections: deletedItem,
     loading: false
@@ -47,7 +57,7 @@ const deleteShared = (state, action) => {
 // error
 const errors = (state, action) => {
   // eslint-disable-next-line no-console
-  console.error(action.payload);
+  console.error('error:', action.payload);
   return updateObject(state, {
     err: action.payload
   });

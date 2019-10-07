@@ -6,7 +6,8 @@ import {
   DELETE_TERM,
   UPDATE_TERM,
   SET_LOADING,
-  TERMS_ERROR
+  TERMS_ERROR,
+  PLAY_TTS
 } from './types';
 
 const api = process.env.API_URL || 'http://localhost:9000';
@@ -23,11 +24,6 @@ export const setLoading = () => {
 export const getTerms = id => async dispatch => {
   try {
     dispatch(setLoading());
-    // const res = await fetch(
-    //   'https://endpoint.yourcode.app/semyers189/api/terms'
-    // );
-    // const data = await res.json();
-    // output = await data.filter(term => term.collectionId === Number(id));
     const res = await axios.get(`${api}/api/terms?collectionId=${id}`);
     dispatch({
       type: GET_TERMS,
@@ -63,9 +59,6 @@ export const addTerm = term => async dispatch => {
 export const deleteTerm = id => async dispatch => {
   try {
     dispatch(setLoading());
-    // await fetch(`https://endpoint.yourcode.app/semyers189/api/terms/${id}`, {
-    //   method: 'DELETE'
-    // });
     await axios.delete(`${api}/api/terms/${id}`);
     dispatch({
       type: DELETE_TERM,
@@ -85,23 +78,30 @@ export const updateTerm = term => async dispatch => {
   const { name, origin } = term;
   try {
     dispatch(setLoading());
-    // const res = await fetch(
-    //   `https://endpoint.yourcode.app/semyers189/api/terms/${term.id}`,
-    //   {
-    //     method: 'PUT',
-    //     body: JSON.stringify(term),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }
-    // );
-    // data = await res.json();
     const res = await axios.put(`${api}/api/terms/${term.id}`, {
       name,
       origin
     });
     dispatch({
       type: UPDATE_TERM,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: TERMS_ERROR,
+      payload: err.response
+    });
+  }
+};
+
+// getting the text to speech
+
+export const getTTS = term => async dispatch => {
+  const { name } = term;
+  try {
+    const res = await axios.post(`${api}/api/terms/tts`, { name });
+    dispatch({
+      type: PLAY_TTS,
       payload: res.data
     });
   } catch (err) {
