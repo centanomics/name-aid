@@ -1,20 +1,23 @@
-const { Term } = require('../models');
+const { Term, Collection } = require('../models');
 const { validationResult } = require('express-validator');
 const googleTTS = require('google-tts-api');
 const transcribe = require('../utils/transcribe');
 const log = require('debug')('api:logging');
 
+// gets all terms and the current collection from the collection id
 exports.getAllTerms = async (req, res) => {
   const { collectionId } = req.query;
   try {
     const terms = await Term.findAll({ where: { collectionId } });
-    res.json(terms);
+    const collection = await Collection.findByPk(collectionId);
+    res.json({ terms, collection });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 };
 
+//gets one term by the id
 exports.getOneTerm = async (req, res) => {
   const { id } = req.params;
   try {
@@ -30,6 +33,7 @@ exports.getOneTerm = async (req, res) => {
   }
 };
 
+// adds a term to the collection
 exports.addTerm = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -40,11 +44,6 @@ exports.addTerm = async (req, res) => {
   const { name, origin, collectionId } = req.body;
   log(collectionId, name, origin);
   try {
-    // const key = 'aa25a0f2-55f1-47ed-bf80-dccca1199bab';
-    // const resp = await axios.get(
-    //   `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${name}?key=${key}`
-    // );
-
     const ipa = await transcribe(name);
 
     const newTerm = await Term.create({
@@ -60,6 +59,7 @@ exports.addTerm = async (req, res) => {
   }
 };
 
+// updates a term by the id
 exports.updateTerm = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -93,6 +93,7 @@ exports.updateTerm = async (req, res) => {
   }
 };
 
+// delets a term by the id
 exports.deleteTerm = async (req, res) => {
   const { id } = req.params;
   try {
@@ -104,6 +105,7 @@ exports.deleteTerm = async (req, res) => {
   }
 };
 
+// gets the text to speech link
 exports.getTTS = async (req, res) => {
   const { name } = req.body;
   try {

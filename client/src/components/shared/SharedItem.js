@@ -17,7 +17,8 @@ const SharedItem = ({ collection, deleteShared, ids }) => {
       <RRNavLink to={`/shared/${id}`}>
         <h3>{name}</h3>
       </RRNavLink>
-      <button type="button" onClick={onClick}>
+      <button type="button" onClick={onClick} className="collection-button">
+        <span>Delete</span>
         <i className="fas fa-trash" />
       </button>
     </ListGroupItem>

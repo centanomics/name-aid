@@ -25,20 +25,25 @@ const TermItem = ({ term, deleteTerm, getTTS }) => {
 
   return (
     <ListGroupItem to="/term">
-      <button
-        type="button"
-        onMouseEnter={changeIpa}
-        onMouseLeave={changeName}
-        onClick={getSound}
-      >
-        <h3>{currName}</h3>
-      </button>
-      <p>{origin}</p>
+      <div className="term-info">
+        <button
+          type="button"
+          onMouseEnter={changeIpa}
+          onMouseLeave={changeName}
+          onClick={getSound}
+          className="term-name"
+        >
+          <h3>{currName}</h3>
+        </button>
+        <p>{origin}</p>
+      </div>
       <div>
-        <button type="button" onClick={toggle}>
+        <button type="button" onClick={toggle} className="collection-button">
+          <span>Edit</span>
           <i className="fas fa-edit" />
         </button>
-        <button type="button" onClick={onClick}>
+        <button type="button" onClick={onClick} className="collection-button">
+          <span>Delete</span>
           <i className="fas fa-trash" />
         </button>
       </div>

@@ -7,7 +7,8 @@ import {
   UPDATE_TERM,
   SET_LOADING,
   TERMS_ERROR,
-  PLAY_TTS
+  PLAY_TTS,
+  SET_CURRENT
 } from './types';
 
 const api = process.env.API_URL || 'http://localhost:9000';
@@ -27,7 +28,11 @@ export const getTerms = id => async dispatch => {
     const res = await axios.get(`${api}/api/terms?collectionId=${id}`);
     dispatch({
       type: GET_TERMS,
-      payload: res.data
+      payload: res.data.terms
+    });
+    dispatch({
+      type: SET_CURRENT,
+      payload: res.data.collection
     });
   } catch (err) {
     dispatch({

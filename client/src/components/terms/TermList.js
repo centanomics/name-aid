@@ -8,16 +8,14 @@ import AddTermModal from './AddTermModal';
 
 import { getTerms } from '../../actions/termsActions';
 
-const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
+const TermList = ({ terms: { terms, loading, tts }, getTerms, match }) => {
   useEffect(() => {
     getTerms(match.params.id);
     // eslint-disable-next-line
   }, []);
 
   const [modal, setModal] = useState(false);
-  const [tts] = useState(
-    'https://translate.google.com/translate_tts?ie=UTF-8&q=James&tl=en&total=1&idx=0&textlen=13&tk=731467.888472&client=t&prev=input'
-  );
+  const [textToSpeech] = useState(tts);
 
   const toggle = () => {
     setModal(!modal);
@@ -77,7 +75,7 @@ const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
       </ListGroup>
       <AddTermModal modal={modal} toggle={toggle} id={match.params.id} />
       <audio autoPlay>
-        <source src={tts} type="audio/mpeg" />
+        <source src={textToSpeech} type="audio/mpeg" />
       </audio>
     </div>
   );

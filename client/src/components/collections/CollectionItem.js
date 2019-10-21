@@ -32,14 +32,21 @@ const CollectionItem = ({
         <h3>{name}</h3>
       </RRNavLink>
       <div>
-        <button type="button" onClick={toggle}>
+        <button type="button" onClick={toggle} className="collection-button">
+          <span>Edit</span>
           <i className="fas fa-edit" />
         </button>
-        <button type="button" onClick={onClick}>
+        <button type="button" onClick={onClick} className="collection-button">
+          <span>Delete</span>
           <i className="fas fa-trash" />
         </button>
         {document.queryCommandSupported('copy') && (
-          <button type="button" onClick={toggleCopy}>
+          <button
+            type="button"
+            onClick={toggleCopy}
+            className="collection-button"
+          >
+            <span>Share</span>
             <i className="fas fa-share" />
           </button>
         )}
