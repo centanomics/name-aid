@@ -95,6 +95,14 @@ h1 {
 
 /* about */
 
+.url {
+  display: none;
+}
+
+.cta {
+  text-align: center;
+}
+
 .container > section {
   display: flex;
   justify-content: space-between;
@@ -117,13 +125,52 @@ h1 {
   align-content: center;
 }
 
+.list-section > button {
+  margin: 0;
+}
+
+.centerinput {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.collection-button {
+  background: transparent;
+  border: none;
+  color: #7d387d;
+}
+
+.term-name {
+  background: transparent;
+  border: none;
+  color: #522452;
+}
+
+.term-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+}
+
 /* list groups */
 
 .list-group-item {
   margin: 8px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: #7d387d;
+}
+
+.list-group-item span {
+  margin-right: 0.5rem;
+  margin-left: 1rem;
+}
+
+.list-group-item a {
+  color: #522452;
 }
 
 .list-group-item:hover {

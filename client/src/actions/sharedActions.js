@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   GET_SHARED,
   ADD_SHARED,
@@ -5,6 +6,8 @@ import {
   SET_LOADING,
   SHARE_ERROR
 } from './types';
+
+const api = process.env.API_URL || 'http://localhost:9000';
 
 // set loading to true
 export const setLoading = () => {
@@ -15,47 +18,37 @@ export const setLoading = () => {
 
 // get shared items from user id
 
-export const getShared = id => async dispatch => {
+export const getShared = () => async dispatch => {
   try {
-    setLoading();
-    const res = await fetch(
-      `https://endpoint.yourcode.app/semyers189/api/shares?userId=${id}`
-    );
-    const data = await res.json();
+    dispatch(setLoading());
+    const res = await axios.get(`${api}/api/shared`);
     dispatch({
       type: GET_SHARED,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: SHARE_ERROR,
-      payload: err.response
+      payload: err
     });
   }
 };
 
 // add shared item
 
-export const addShared = sharedCollection => async dispatch => {
+export const addShared = collectionId => async dispatch => {
   try {
-    setLoading();
-    const res = await fetch(
-      'https://endpoint.yourcode.app/semyers189/api/shares',
-      {
-        method: 'POST',
-        body: JSON.stringify(sharedCollection),
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
-    const data = await res.json();
+    dispatch(setLoading());
+    const res = await axios.post(`${api}/api/shared/${collectionId}`);
+    console.log(res.data.collection, res.data.terms);
     dispatch({
       type: ADD_SHARED,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: SHARE_ERROR,
-      payload: err.response
+      payload: err
     });
   }
 };
@@ -64,10 +57,11 @@ export const addShared = sharedCollection => async dispatch => {
 
 export const deleteShared = id => async dispatch => {
   try {
-    setLoading();
-    await fetch(`https://endpoint.yourcode.app/semyers189/api/shares/${id}`, {
-      method: 'DELETE'
-    });
+    dispatch(setLoading());
+    // await fetch(`https://endpoint.yourcode.app/semyers189/api/shares/${id}`, {
+    //   method: 'DELETE'
+    // });
+    await axios.delete(`${api}/api/shared/${id}`);
     dispatch({
       type: DELETE_SHARED,
       payload: id
@@ -75,7 +69,7 @@ export const deleteShared = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: SHARE_ERROR,
-      payload: err.response
+      payload: err
     });
   }
 };

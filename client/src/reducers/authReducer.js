@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  EMAIL_SENT
 } from '../actions/types';
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   error: null,
-  user: null
+  user: null,
+  message: null
 };
 
 export default (state = initialState, action) => {
@@ -47,6 +49,11 @@ export default (state = initialState, action) => {
         loading: false,
         user: null,
         error: action.payload
+      };
+    case EMAIL_SENT:
+      return {
+        ...state,
+        message: action.payload
       };
     case CLEAR_ERRORS:
       return {

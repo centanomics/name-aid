@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('Terms', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       name: {
         type: Sequelize.STRING
@@ -15,7 +15,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       collectionId: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        references: {
+          model: 'Collections',
+          column: 'id'
+        }
+      },
+      ipa: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

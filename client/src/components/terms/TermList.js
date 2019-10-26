@@ -2,23 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, ListGroup, ListGroupItem, Spinner } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import TermItem from './TermItem';
 import AddTermModal from './AddTermModal';
 
 import { getTerms } from '../../actions/termsActions';
 
-const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
+const TermList = ({ terms: { terms, loading, tts }, getTerms, match }) => {
   useEffect(() => {
     getTerms(match.params.id);
     // eslint-disable-next-line
   }, []);
 
   const [modal, setModal] = useState(false);
+  const [textToSpeech] = useState(tts);
 
   const toggle = () => {
     setModal(!modal);
   };
+
+  if (match.params.id === 'undefined') {
+    return (
+      <div>
+        <div className="list-section">
+          <p>
+            {terms.length}
+            {' Names'}
+          </p>
+          <Button color="danger" onClick={toggle}>
+            Add new name
+          </Button>
+        </div>
+        <ListGroup>
+          <ListGroupItem>
+            <h3>
+              No terms selected! Go back to
+              <Link to="/home"> collections </Link>
+              to select one
+            </h3>
+          </ListGroupItem>
+        </ListGroup>
+        <AddTermModal modal={modal} toggle={toggle} id={match.params.id} />
+      </div>
+    );
+  }
 
   if (loading || terms === null) {
     return <Spinner />;
@@ -46,11 +73,10 @@ const TermList = ({ terms: { terms, loading }, getTerms, match }) => {
           })
         )}
       </ListGroup>
-      <AddTermModal
-        modal={modal}
-        toggle={toggle}
-        id={Number(match.params.id)}
-      />
+      <AddTermModal modal={modal} toggle={toggle} id={match.params.id} />
+      <audio autoPlay>
+        <source src={textToSpeech} type="audio/mpeg" />
+      </audio>
     </div>
   );
 };

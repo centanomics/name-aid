@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // import { Link } from 'react-router-dom';
 import {
@@ -11,12 +13,20 @@ import {
   NavLink
 } from 'reactstrap';
 import { NavLink as RRNavLink, withRouter } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import { logout, loadUser } from '../../actions/authActions';
 
-const Header = props => {
-  const authContext = useContext(AuthContext);
+const Header = ({
+  history,
+  auth: { isAuthenticated },
+  logout,
+  loadUser,
+  collections: { currentCollection }
+}) => {
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
   const [open, setOpen] = useState(false);
-  const { isAuthenticated, logout } = authContext;
 
   const toggle = () => {
     setOpen(!open);
@@ -24,8 +34,7 @@ const Header = props => {
 
   const logOut = () => {
     logout();
-    // eslint-disable-next-line react/prop-types
-    props.history.push('/');
+    history.push('/');
   };
 
   const authLinks = (
@@ -41,13 +50,22 @@ const Header = props => {
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink tag={RRNavLink} to="/term" activeClassName="selected">
+        <NavLink
+          tag={RRNavLink}
+          to={`/term/${currentCollection.id}`}
+          activeClassName="selected"
+        >
           Terms
         </NavLink>
       </NavItem>
       <NavItem>
         <NavLink tag={RRNavLink} to="/shared" activeClassName="selected">
           Shared Items
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink tag={RRNavLink} to="/contact" activeClassName="selected">
+          Contact
         </NavLink>
       </NavItem>
       <NavItem>
@@ -62,6 +80,11 @@ const Header = props => {
       <NavItem>
         <NavLink tag={RRNavLink} to="/about" activeClassName="selected">
           About
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink tag={RRNavLink} to="/contact" activeClassName="selected">
+          Contact
         </NavLink>
       </NavItem>
       <NavItem>
@@ -96,4 +119,20 @@ const Header = props => {
   );
 };
 
-export default withRouter(Header);
+Header.propTypes = {
+  auth: PropTypes.object.isRequired,
+  collections: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  collections: state.collections
+});
+
+export default connect(
+  mapStateToProps,
+  { logout, loadUser }
+)(withRouter(Header));

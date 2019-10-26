@@ -1,4 +1,5 @@
 import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -7,16 +8,19 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  EMAIL_SENT
 } from './types';
+
+const api = process.env.API_URL || 'http://localhost:9000';
 
 // load user
 
 export const loadUser = () => async dispatch => {
-  // if (localStorage.token) setAuthToken(localStorage.token);
+  if (localStorage.token) setAuthToken(localStorage.token);
   try {
     // change this later
-    const res = await axios.get('/api/auth');
+    const res = await axios.get(`${api}/api/auth`);
 
     dispatch({
       type: USER_LOADED,
@@ -38,7 +42,7 @@ export const registerUser = formData => async dispatch => {
     }
   };
   try {
-    const res = await axios.post('/api/users', formData, config);
+    const res = await axios.post(`${api}/api/auth/users`, formData, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -62,8 +66,7 @@ export const login = formData => async dispatch => {
     }
   };
   try {
-    const res = await axios.post('/api/auth', formData, config);
-
+    const res = await axios.post(`${api}/api/auth/login`, formData, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
@@ -89,5 +92,34 @@ export const logout = () => async dispatch => {
 export const clearErrors = () => async dispatch => {
   dispatch({
     type: CLEAR_ERRORS
+  });
+};
+
+// forgot password
+export const forgotPassword = email => async dispatch => {
+  const res = await axios.post(`${api}/api/auth/forgot`, { email });
+  // console.log(res);
+};
+
+// reset password
+export const resetPassword = (token, password, password2) => async dispatch => {
+  const res = await axios.post(`${api}/api/auth/reset`, {
+    token,
+    password,
+    password2
+  });
+  dispatch({
+    type: LOGIN_SUCCESS,
+    payload: res.data
+  });
+};
+
+// send email
+
+export const sendEmail = user => async dispatch => {
+  const res = await axios.post(`${api}/api/auth/send`, user);
+  dispatch({
+    type: EMAIL_SENT,
+    payload: res.data
   });
 };

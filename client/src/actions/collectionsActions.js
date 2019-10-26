@@ -1,11 +1,17 @@
+import axios from 'axios';
+// import API from '../utils/API';
 import {
   GET_COLLECTIONS,
   COLLECTIONS_ERROR,
   SET_COLLECTION_LOADING,
   ADD_COLLECTION,
   DELETE_COLLECTION,
-  UPDATE_COLLECTION
+  UPDATE_COLLECTION,
+  SET_CURRENT
 } from './types';
+import setAuthToken from '../utils/setAuthToken';
+
+const api = process.env.API_URL || 'http://localhost:9000';
 
 // sets loading to true
 export const setLoading = () => {
@@ -17,50 +23,42 @@ export const setLoading = () => {
 // get collections
 
 export const getCollections = () => async dispatch => {
-  let data;
+  if (localStorage.token) setAuthToken(localStorage.token);
   try {
     dispatch(setLoading());
-    const res = await fetch(
-      'https://endpoint.yourcode.app/semyers189/api/collections'
-    );
-    data = await res.json();
+    const res = await axios.get(`${api}/api/collections`);
+    dispatch({
+      type: GET_COLLECTIONS,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
-      payload: err
+      payload: err.toString()
     });
   }
-  dispatch({
-    type: GET_COLLECTIONS,
-    payload: data
-  });
 };
 
 // add a collection
 
 export const addCollection = collection => async dispatch => {
-  let data;
+  if (localStorage.token) setAuthToken(localStorage.token);
+  const { name } = collection;
   try {
     dispatch(setLoading());
-    const res = await fetch(
-      'https://endpoint.yourcode.app/semyers189/api/collections',
-      {
-        method: 'POST',
-        body: JSON.stringify(collection),
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
-    data = await res.json();
+    const { data } = await axios.post(`${api}/api/collections`, {
+      name
+    });
+    dispatch({
+      type: ADD_COLLECTION,
+      payload: data.newCollection
+    });
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
-  dispatch({
-    type: ADD_COLLECTION,
-    payload: data
-  });
 };
 
 // delete a collection
@@ -68,49 +66,44 @@ export const addCollection = collection => async dispatch => {
 export const deleteCollection = id => async dispatch => {
   try {
     dispatch(setLoading());
-    await fetch(
-      `https://endpoint.yourcode.app/semyers189/api/collections/${id}`,
-      {
-        method: 'DELETE'
-      }
-    );
+    await axios.delete(`${api}/api/collections/${id}`);
+    dispatch({
+      type: DELETE_COLLECTION,
+      payload: id
+    });
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
-  dispatch({
-    type: DELETE_COLLECTION,
-    payload: id
-  });
 };
 
 // update a collection
 
 export const updateCollection = collection => async dispatch => {
-  let data;
+  const { name } = collection;
   try {
     dispatch(setLoading());
-    const res = await fetch(
-      `https://endpoint.yourcode.app/semyers189/api/collections/${collection.id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(collection),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    data = await res.json();
+    const res = await axios.put(`${api}/api/collections/${collection.id}`, {
+      name
+    });
+    dispatch({
+      type: UPDATE_COLLECTION,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: COLLECTIONS_ERROR,
       payload: err.response
     });
   }
+};
+
+// set current collection
+export const setCurrentCollection = collection => async dispatch => {
   dispatch({
-    type: UPDATE_COLLECTION,
-    payload: data
+    type: SET_CURRENT,
+    payload: collection
   });
 };

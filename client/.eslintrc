@@ -41,7 +41,8 @@
     "valid-typeof": "warn",
     "prefer-object-spread": "off",
     "no-case-declarations": "off",
-    "no-prototype-builtins": "off"
+    "no-prototype-builtins": "off",
+    "jsx-a11y/media-has-caption": off
   },
   "globals": {
     "window": true,

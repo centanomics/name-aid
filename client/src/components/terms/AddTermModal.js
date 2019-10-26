@@ -98,7 +98,7 @@ AddTermModal.propTypes = {
   modal: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   addTerm: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.string.isRequired
 };
 
 export default connect(

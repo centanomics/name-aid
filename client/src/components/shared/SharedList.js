@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ListGroup, ListGroupItem, Spinner } from 'reactstrap';
 import SharedItem from './SharedItem';
 import { getShared } from '../../actions/sharedActions';
 
-const SharedList = ({ shared: { loading, sharedCollections }, getShared }) => {
+const SharedList = ({
+  shared: { loading, sharedCollections },
+  getShared,
+  match
+}) => {
   useEffect(() => {
-    getShared(1);
+    getShared(match.params.id);
     // eslint-disable-next-line
   }, []);
 
@@ -31,7 +36,13 @@ const SharedList = ({ shared: { loading, sharedCollections }, getShared }) => {
           </ListGroupItem>
         ) : (
           sharedCollections.map(collection => {
-            return <SharedItem collection={collection} key={collection.id} />;
+            return (
+              <SharedItem
+                collection={collection.Collection}
+                key={collection.id}
+                ids={collection.id}
+              />
+            );
           })
         )}
       </ListGroup>
@@ -41,7 +52,8 @@ const SharedList = ({ shared: { loading, sharedCollections }, getShared }) => {
 
 SharedList.propTypes = {
   shared: PropTypes.object.isRequired,
-  getShared: PropTypes.func.isRequired
+  getShared: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -51,4 +63,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getShared }
-)(SharedList);
+)(withRouter(SharedList));

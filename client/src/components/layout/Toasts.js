@@ -11,8 +11,12 @@ const Toasts = ({ message, open }) => {
 };
 
 Toasts.propTypes = {
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
   open: PropTypes.bool.isRequired
+};
+
+Toasts.defaultProps = {
+  message: ''
 };
 
 export default Toasts;

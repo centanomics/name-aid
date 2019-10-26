@@ -9,23 +9,35 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
-      },
-      collectionId: {
-        allowNull: false,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
+        validate: {
+          isUUID: {
+            args: 4,
+            msg: 'Collection is not found, try again'
+          }
+        }
       },
       userId: {
-        allowNull: false,
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
+      collectionId: {
+        type: DataTypes.UUID,
+        references: {
+          model: 'Collections',
+          column: 'id'
+        }
       }
     },
     {}
   );
   Share.associate = function(models) {
     // associations can be defined here
+    Share.belongsTo(models.Collection, { foreignKey: 'collectionId' });
+    Share.belongsTo(models.User), { foreignKey: 'userId' };
   };
   return Share;
 };

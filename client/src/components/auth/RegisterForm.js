@@ -1,49 +1,67 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import { registerUser } from '../../actions/authActions';
+import Toasts from '../layout/Toasts';
 
-const Register = props => {
-  const authContext = useContext(AuthContext);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+const Register = ({
+  auth: { isAuthenticated, error },
+  history,
+  registerUser
+}) => {
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState('');
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/home');
+    }
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
 
-  const { login } = authContext;
+  useEffect(() => {
+    if (error) {
+      setMsg(error);
+      setShow(!show);
+      setTimeout(() => setShow(false), 5000);
+    }
+    // eslint-disable-next-line
+  }, [error]);
 
-  const changeName = e => {
-    setName(e.value);
-  };
-  const changeEmail = e => {
-    setEmail(e.value);
-  };
-  const changePassword = e => {
-    setPassword(e.value);
-  };
-  const changePassword2 = e => {
-    setPassword2(e.value);
-  };
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
+  });
+
+  const { name, email, password, password2 } = user;
+
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    login();
+
+    registerUser(user);
+
     // eslint-disable-next-line react/prop-types
-    props.history.push('/home');
   };
 
   return (
     <Form onSubmit={onSubmit} className="container">
       <h1>Create an Account</h1>
       <FormGroup>
+        <Toasts message={msg} open={show} />
         <Label for="name">Full Name:</Label>
         <Input
           type="text"
           name="name"
           id="name"
+          autoComplete="name"
           placeholder="John Doe"
-          onChange={changeName}
+          onChange={onChange}
           value={name}
         />
       </FormGroup>
@@ -53,8 +71,9 @@ const Register = props => {
           type="email"
           name="email"
           id="email"
+          autoComplete="email"
           placeholder="johndoe@gmail.com"
-          onChange={changeEmail}
+          onChange={onChange}
           value={email}
         />
       </FormGroup>
@@ -63,8 +82,9 @@ const Register = props => {
         <Input
           type="password"
           name="password"
+          autoComplete="new-password"
           id="password"
-          onChange={changePassword}
+          onChange={onChange}
           value={password}
         />
       </FormGroup>
@@ -74,7 +94,8 @@ const Register = props => {
           type="password"
           name="password2"
           id="password2"
-          onChange={changePassword2}
+          autoComplete="new-password"
+          onChange={onChange}
           value={password2}
         />
       </FormGroup>
@@ -83,4 +104,17 @@ const Register = props => {
   );
 };
 
-export default withRouter(Register);
+Register.propTypes = {
+  auth: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));

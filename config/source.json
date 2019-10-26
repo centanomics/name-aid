@@ -1,0 +1,10 @@
+{
+  "web": {
+    "client_id": "563801882567-ovtc3iue0dd1vgk2j8q9npn9se4smv30.apps.googleusercontent.com",
+    "project_id": "name-aid",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "-D34ycKcTtXH-Ux8OJBn9pPN"
+  }
+}

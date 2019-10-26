@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   collections: [],
+  currentCollection: {},
   loading: false,
   error: null
 };
@@ -84,13 +85,21 @@ const setLoading = state => {
   });
 };
 
+// set current collection
+const setCurrent = (state, action) => {
+  return updateObject(state, {
+    currentCollection: action.payload
+  });
+};
+
 const collectionReducer = createReducer([], {
   GET_COLLECTIONS: getCollections,
   ADD_COLLECTION: addCollection,
   DELETE_COLLECTION: deleteCollection,
   UPDATE_COLLECTION: updateCollection,
   COLLECTIONS_ERROR: errors,
-  SET_COLLECTION_LOADING: setLoading
+  SET_COLLECTION_LOADING: setLoading,
+  SET_CURRENT: setCurrent
 });
 
 export default (state = initialState, action) => {
