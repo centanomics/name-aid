@@ -48,7 +48,23 @@ router.post('/forgot', authCtrl.forgotPassword);
 // @route     POST api/auth/reset
 // @desc      Resets a users password
 // @access    Public
-// router.post('/reset', authCtrl.resetPassword);
 router.post('/reset', authCtrl.resetPassword);
+
+// @route     POST api/auth/send
+// @desc      sends a users email to me
+// @access    Public
+router.post(
+  '/send',
+  [
+    check('name', 'Please include a name')
+      .not()
+      .isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check('message', "Please make sure your message isn't empty")
+      .not()
+      .isEmpty()
+  ],
+  authCtrl.sendEmail
+);
 
 module.exports = router;

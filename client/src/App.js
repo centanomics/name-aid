@@ -21,6 +21,7 @@ import SharedCollections from './components/pages/SharedCollections';
 import Shared from './components/pages/Shared';
 import Forgot from './components/pages/Forgot';
 import Reset from './components/pages/Reset';
+import Contact from './components/pages/Contact';
 
 import './App.css';
 
@@ -43,7 +44,8 @@ const App = () => {
             <Route exact path="/auth/reset_password" component={Reset} />
             <Route exact path="/term/:id" component={Terms} />
             <Route exact path="/shared" component={SharedCollections} />
-            <Route exatc path="/shared/:id" component={Shared} />
+            <Route exact path="/shared/:id" component={Shared} />
+            <Route exact path="/contact" component={Contact} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

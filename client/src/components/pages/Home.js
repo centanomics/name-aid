@@ -6,15 +6,9 @@ const Home = () => {
   return (
     <section className="container">
       <h1>Having Trouble Pronouncing Names?</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-        convallis sodales egestas. Suspendisse ac vestibulum eros. Nunc
-        facilisis lacus interdum lobortis convallis. Quisque eu nunc non dui
-        pretium maximus et at libero. Etiam tincidunt velit quis sagittis
-        condimentum. Sed lacus diam, consectetur ac gravida faucibus, lacinia
-        sed nisl. Quisque sed nunc a magna semper dictum. Phasellus fermentum
-        orci at dictum pharetra. Quisque sed nunc a magna semper dictum.
-        Phasellus fermentum orci at dictum pharetra.
+      <p className="cta">
+        Then Name Aid is the site for you. Organize names as you see fit and
+        practice whenever. Start by creating your collection today!
       </p>
       <Button tag={RRNavLink} to="/register">
         Get Started

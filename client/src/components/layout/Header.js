@@ -64,6 +64,11 @@ const Header = ({
         </NavLink>
       </NavItem>
       <NavItem>
+        <NavLink tag={RRNavLink} to="/contact" activeClassName="selected">
+          Contact
+        </NavLink>
+      </NavItem>
+      <NavItem>
         <NavLink onClick={logOut} tag={RRNavLink} to="#">
           Logout
         </NavLink>
@@ -75,6 +80,11 @@ const Header = ({
       <NavItem>
         <NavLink tag={RRNavLink} to="/about" activeClassName="selected">
           About
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink tag={RRNavLink} to="/contact" activeClassName="selected">
+          Contact
         </NavLink>
       </NavItem>
       <NavItem>

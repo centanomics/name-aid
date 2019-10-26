@@ -3,6 +3,8 @@ const crypto = require('crypto');
 const config = require('config');
 const bcrypt = require('bcrypt');
 const mailer = require('../utils/mailer');
+const nodemailer = require('nodemailer');
+const serverConfig = require('../config/source.json');
 const { User, Sequelize } = require('../models');
 const { validationResult } = require('express-validator');
 
@@ -231,6 +233,60 @@ exports.resetPassword = async (req, res) => {
     // res.json({
     //   msg: 'Password Reset'
     // });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+exports.sendEmail = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, email, message } = req.body;
+
+  try {
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     type: 'OAuth2',
+    //     clientId: source.web.client_id,
+    //     clientSecret: source.web.client_secret,
+    //     refreshToken: process.env.REFRESH_TOKEN,
+    //     accessToken: process.env.ACCESS_TOKEN
+    //   }
+    // });
+
+    // transporter.use(
+    //   'compile',
+    //   pugEngine({
+    //     templateDir: `${__dirname}/../emailTemplates`,
+    //     pretty: true
+    //   })
+    // );
+
+    const data = {
+      to: 'shannonemyers189@gmail.com',
+      from: `${name.replace(/\s/g, '')}@yourcode.app`,
+      template: 'send',
+      subject: 'Contact Form.',
+      ctx: {
+        msg: message,
+        name: name,
+        email: email
+      }
+    };
+
+    try {
+      await mailer.sendMail(data);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('mail error');
+    }
+
+    res.json('Your message has been sent!');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

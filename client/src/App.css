@@ -95,6 +95,14 @@ h1 {
 
 /* about */
 
+.url {
+  display: none;
+}
+
+.cta {
+  text-align: center;
+}
+
 .container > section {
   display: flex;
   justify-content: space-between;

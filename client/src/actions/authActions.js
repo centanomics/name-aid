@@ -8,7 +8,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  EMAIL_SENT
 } from './types';
 
 const api = process.env.API_URL || 'http://localhost:9000';
@@ -109,6 +110,16 @@ export const resetPassword = (token, password, password2) => async dispatch => {
   });
   dispatch({
     type: LOGIN_SUCCESS,
+    payload: res.data
+  });
+};
+
+// send email
+
+export const sendEmail = user => async dispatch => {
+  const res = await axios.post(`${api}/api/auth/send`, user);
+  dispatch({
+    type: EMAIL_SENT,
     payload: res.data
   });
 };
