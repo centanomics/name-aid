@@ -10,6 +10,8 @@ const authRouter = require('./routes/auth');
 
 const app = express();
 
+//adding
+
 app.use(cors());
 
 const PORT = process.env.PORT || 9000;
