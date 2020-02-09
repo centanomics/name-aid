@@ -20,7 +20,7 @@
     "password": "2182cf7b1c24946616c3c3c1a4131a277794e19866084801d31b313e23df725c",
     "database": "d8llhq5gnvrvc3",
     "host": "ec2-3-213-192-58.compute-1.amazonaws.com",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "port": "5432",
     "operatorsAliases": false
   }
